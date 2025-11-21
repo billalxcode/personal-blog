@@ -1,0 +1,29 @@
+baseURL = 'https://billalxcode.web.id/'
+languageCode = 'en-us'
+title = 'Billal Fauzan'
+theme = "hugo-paper"
+
+[params]
+    color = 'wheat'
+
+    twitter = 'CatDoom666'
+    github = 'billalxcode'
+    instagram = 'billalxode_'
+    linkedin = 'billalxcode'
+    rss = true
+
+    avatar = 'https://avatars.githubusercontent.com/u/71764176?v=4'
+    name = 'Billal Fauzan'
+    bio = 'No life'
+
+    disableHLJS = true
+    disablePostNavigation = true
+    monoDarkIcon = true
+    math = true
+    localKatex = false
+    favicon = "favicon.ico"
+    appleTouchIcon = "apple-touch-icon.png"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
