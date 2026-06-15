@@ -1,4 +1,30 @@
-export const siteConfig = {
+export interface Project {
+  readonly title: string;
+  readonly image: string;
+  readonly description: string;
+  readonly tags: readonly string[];
+  readonly links: {
+    readonly github: string;
+    readonly website?: string;
+    readonly [key: string]: string | undefined;
+  };
+}
+
+export interface SiteConfig {
+  readonly title: string;
+  readonly author: {
+    readonly name: string;
+    readonly affiliation: string;
+    readonly bio: string;
+    readonly email: string;
+  };
+  readonly projects: readonly Project[];
+  readonly footer: {
+    readonly copyright: string;
+  };
+}
+
+export const siteConfig: SiteConfig = {
   title: "Journal",
   author: {
     name: "Billal Fauzan",

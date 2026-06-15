@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 export function ProjectList() {
   const projects = siteConfig.projects;
 
-  if (!projects || (projects.length as number) === 0) {
+  if (!projects || projects.length === 0) {
     return null;
   }
 
