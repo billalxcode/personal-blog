@@ -12,12 +12,16 @@ export interface Project {
 
 export interface SiteConfig {
   readonly title: string;
+  readonly description: string;
+  readonly url: string;
+  readonly locale: string;
   readonly author: {
     readonly name: string;
     readonly affiliation: string;
     readonly bio: string;
     readonly email: string;
   };
+  readonly keywords: readonly string[];
   readonly projects: readonly Project[];
   readonly footer: {
     readonly copyright: string;
@@ -25,13 +29,27 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  title: "Journal",
+  title: "Journal — Billal Fauzan",
+  description:
+    "Research articles and projects in Machine Learning, Agentic AI, and Computer Vision by Billal Fauzan.",
+  url: "https://journal.myweb.xyz",
+  locale: "en_US",
   author: {
     name: "Billal Fauzan",
     affiliation: "Independent Researcher",
     bio: "Researcher in Machine Learning, Agentic AI, and Computer Vision.",
     email: "billal.xcode@gmail.com",
   },
+  keywords: [
+    "Machine Learning",
+    "Agentic AI",
+    "Computer Vision",
+    "Research",
+    "Billal Fauzan",
+    "Science Blog",
+    "LaTeX",
+    "Quantum Computing",
+  ],
   projects: [
     {
       title: "Agentic AI Framework",

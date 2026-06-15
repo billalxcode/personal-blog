@@ -11,7 +11,9 @@ export default function Home() {
     <div className="page-container">
       <AuthorProfile />
       <main>
-        <ArticleList articles={articles} />
+        <section aria-label="Published Articles">
+          <ArticleList articles={articles} />
+        </section>
         <ProjectList />
       </main>
       <Footer />

@@ -15,19 +15,22 @@ export function ArticleList({ articles }: ArticleListProps) {
   }
 
   return (
-    <ul className="article-list">
+    <ul className="article-list" role="list">
       {articles.map((article) => (
         <li key={article.slug} className="article-list-item">
           <Link href={`/articles/${article.slug}`} className="article-title-link">
             {article.title}
           </Link>
           <div className="article-meta">
-            {article.author} ·{" "}
-            {new Date(article.published_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            <span>{article.author}</span>
+            {" · "}
+            <time dateTime={article.published_at}>
+              {new Date(article.published_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
           </div>
         </li>
       ))}
