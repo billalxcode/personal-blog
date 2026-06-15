@@ -6,6 +6,27 @@ export const siteConfig = {
     bio: "Researcher in Machine Learning, Agentic AI, and Computer Vision.",
     email: "billal.xcode@gmail.com",
   },
+  projects: [
+    {
+      title: "Agentic AI Framework",
+      image: "/project-agent-ai.png",
+      description: "An orchestration framework for building, testing, and deploying multi-agent AI systems with persistent state and dynamic tool selection.",
+      tags: ["Agentic AI", "TypeScript", "LLMs", "Vector DB"],
+      links: {
+        github: "https://github.com/billalxcode/agentic-ai-framework",
+        website: "https://agentic-ai.journal.myweb.xyz",
+      },
+    },
+    {
+      title: "Vision Model Classifier",
+      image: "/project-vision-model.png",
+      description: "Real-time object detection and classification model built using convolutional neural networks and optimized for edge devices.",
+      tags: ["Computer Vision", "Python", "PyTorch", "CNN"],
+      links: {
+        github: "https://github.com/billalxcode/vision-model-classifier",
+      },
+    },
+  ],
   footer: {
     copyright: `© ${new Date().getFullYear()} Billal Fauzan. All rights reserved.`,
   },

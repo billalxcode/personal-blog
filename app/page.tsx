@@ -2,6 +2,7 @@ import { AuthorProfile } from "@/components/AuthorProfile";
 import { ArticleList } from "@/components/ArticleList";
 import { Footer } from "@/components/Footer";
 import { getPublishedArticles } from "@/lib/articles";
+import { ProjectList } from "@/components/ProjectList";
 
 export default function Home() {
   const articles = getPublishedArticles();
@@ -11,6 +12,7 @@ export default function Home() {
       <AuthorProfile />
       <main>
         <ArticleList articles={articles} />
+        <ProjectList />
       </main>
       <Footer />
     </div>

@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       {
         pathname: "/articles/*/images/**",
       },
+      {
+        pathname: "/*",
+      },
     ],
   },
 };
