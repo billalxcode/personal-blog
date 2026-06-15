@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { renderInlineMath, renderDisplayMath } from "./katex-bridge";
 import { ASTNode, DocumentNode } from "./types";
 
@@ -299,7 +300,7 @@ function renderNode(
         isEquation = false;
       }
 
-      let cleanLatex = node.latex.replace(/\\label\{([^}]+)\}/g, "");
+      const cleanLatex = node.latex.replace(/\\label\{([^}]+)\}/g, "");
       const html = renderDisplayMath(cleanLatex);
 
       if (isEquation) {
@@ -423,11 +424,15 @@ function renderNode(
         ? node.src
         : `/articles/${slug}/images/${node.src}`;
       return (
-        <img
-          src={imageUrl}
-          alt="LaTeX Figure"
-          className="latex-image mx-auto my-4"
-        />
+        <div className="relative w-full h-[400px] my-4">
+          <Image
+            src={imageUrl}
+            alt="LaTeX Figure"
+            fill
+            sizes="(max-width: 720px) 100vw, 720px"
+            className="object-contain"
+          />
+        </div>
       );
     }
 

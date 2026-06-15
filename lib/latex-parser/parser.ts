@@ -9,6 +9,8 @@ import {
   TextStyleNode,
   ItemNode,
   BibitemNode,
+  TheoremNode,
+  CaptionNode,
 } from "./types";
 
 export function parse(tokens: Token[]): DocumentNode {
@@ -201,7 +203,7 @@ export function parse(tokens: Token[]): DocumentNode {
 
     if (t.type === "NEWLINE") {
       advance();
-      return { type: "newline" } as any;
+      return { type: "newline" };
     }
 
     if (t.type === "COMMAND") {
@@ -327,7 +329,7 @@ export function parse(tokens: Token[]): DocumentNode {
       // Figure/Table details
       if (cmdName === "caption") {
         const content = readBraceGroupParsed();
-        return { type: "caption" as any, content };
+        return { type: "caption", content };
       }
 
       // Bibitem
@@ -388,7 +390,7 @@ export function parse(tokens: Token[]): DocumentNode {
             next.value === "document"
         );
         if (matchEnvEnd("document")) advance();
-        return { type: "document_body" as any, content };
+        return { type: "document_body", content };
       }
 
       if (envName === "abstract") {
@@ -433,7 +435,7 @@ export function parse(tokens: Token[]): DocumentNode {
         if (matchEnvEnd(envName)) advance();
         return {
           type: "theorem",
-          envType: envName as any,
+          envType: envName as TheoremNode["envType"],
           content: groupParagraphs(content),
         };
       }
@@ -481,10 +483,10 @@ export function parse(tokens: Token[]): DocumentNode {
         );
         if (matchEnvEnd("figure")) advance();
         const captionNode = content.find(
-          (n) => (n as any).type === "caption"
-        ) as any;
+          (n) => n.type === "caption"
+        ) as CaptionNode | undefined;
         const filteredContent = content.filter(
-          (n) => (n as any).type !== "caption"
+          (n) => n.type !== "caption"
         );
         return {
           type: "figure",
@@ -502,10 +504,10 @@ export function parse(tokens: Token[]): DocumentNode {
         );
         if (matchEnvEnd("table")) advance();
         const captionNode = content.find(
-          (n) => (n as any).type === "caption"
-        ) as any;
+          (n) => n.type === "caption"
+        ) as CaptionNode | undefined;
         const filteredContent = content.filter(
-          (n) => (n as any).type !== "caption"
+          (n) => n.type !== "caption"
         );
         return {
           type: "table",
@@ -552,8 +554,9 @@ export function parse(tokens: Token[]): DocumentNode {
 
       // Bibliography
       if (envName === "thebibliography") {
-        const width =
-          peek()?.type === "BRACE_OPEN" ? readBraceGroupRaw() : "";
+        if (peek()?.type === "BRACE_OPEN") {
+          readBraceGroupRaw();
+        }
         const content = parseUntil(
           (next) =>
             next !== undefined &&
@@ -571,7 +574,7 @@ export function parse(tokens: Token[]): DocumentNode {
           next.value === envName
       );
       if (matchEnvEnd(envName)) advance();
-      return { type: "paragraph", content: groupParagraphs(content) } as any;
+      return { type: "paragraph", content: groupParagraphs(content) };
     }
 
     advance();
@@ -595,7 +598,7 @@ export function parse(tokens: Token[]): DocumentNode {
     for (const node of nodes) {
       if (!node) continue;
 
-      if ((node as any).type === "newline") {
+      if (node.type === "newline") {
         flush();
         continue;
       }
@@ -636,8 +639,8 @@ export function parse(tokens: Token[]): DocumentNode {
       preamble.author = node.content;
     } else if (node.type === "date") {
       preamble.date = node.content;
-    } else if ((node as any).type === "document_body") {
-      contentNodes.push(...(node as any).content);
+    } else if (node.type === "document_body") {
+      contentNodes.push(...node.content);
     } else {
       contentNodes.push(node);
     }

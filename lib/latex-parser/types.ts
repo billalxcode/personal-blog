@@ -211,6 +211,20 @@ export interface AmpersandNode {
   type: "ampersand";
 }
 
+export interface NewlineNode {
+  type: "newline";
+}
+
+export interface DocumentBodyNode {
+  type: "document_body";
+  content: ASTNode[];
+}
+
+export interface CaptionNode {
+  type: "caption";
+  content: ASTNode[];
+}
+
 export type ASTNode =
   | DocumentNode
   | TextNode
@@ -244,4 +258,8 @@ export type ASTNode =
   | HrefNode
   | UrlNode
   | LinebreakNode
-  | AmpersandNode;
+  | AmpersandNode
+  | NewlineNode
+  | DocumentBodyNode
+  | CaptionNode;
+
