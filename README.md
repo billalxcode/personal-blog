@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Academic Science Journal & Portfolio Blog
 
-## Getting Started
+A static personal blog and software portfolio built with Next.js 16 (App Router) and styled to resemble an **IEEE academic paper preprint**. 
 
-First, run the development server:
+All article content is authored in pure LaTeX (`.tex`), processed by a custom server-side parsing engine, and rendered directly to static semantic HTML, using KaTeX for server-side mathematical formula rendering (zero client-side JavaScript required for content pages).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠 Features
+
+1. **LaTeX Engine**: A custom built-in parser pipeline (`Tokenizer -> AST -> React Renderer`) parsing native LaTeX commands.
+2. **KaTeX Integration**: High-performance SSR math formula rendering for inline (`$...$`) and display (`$$...$$` and `\[...\]`) equations.
+3. **IEEE Formatting**: B&W stylesheet with serif typography (STIX Two Text fallback), abstract sections, Roman-numbered headings, theorem/proof cards, footnote anchors, and hanging-indent citation listings.
+4. **Research Portfolio**: Homepage showcase for systems and software projects, with descriptions, tags, visual diagrams, and code repository links.
+5. **Static Site Generation (SSG)**: Fast pages pre-rendered at build-time using dynamic segment routing.
+
+---
+
+## 📂 Project Structure
+
+```text
+personal-blog/
+├── app/
+│   ├── layout.tsx              # Root HTML layout (B&W theme, serif fonts)
+│   ├── page.tsx                # Homepage rendering profile, articles, and projects
+│   ├── globals.css             # IEEE stylesheet & portfolio layout rules
+│   └── articles/
+│       └── [slug]/
+│           ├── page.tsx        # Dynamic route for rendering LaTeX articles
+│           └── images/         # Route handler for serving local article assets
+├── articles/                   # Content directory
+│   └── [slug]/
+│       ├── metadata.json       # Article configurations (title, status, date, entrypoint)
+│       └── main.tex            # Document body in LaTeX format
+├── components/                 # Shared React layouts (AuthorProfile, ProjectList, etc.)
+├── config/
+│   └── site.ts                 # Global metadata, author details, and portfolio items
+└── lib/
+    ├── articles.ts             # Filesystem helpers for querying local metadata & sources
+    └── latex-parser/           # LaTeX parser engine pipeline (Types, Tokenizer, Parser, Renderer)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Authoring Articles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To publish a new paper, create a folder inside the `articles/` directory:
 
-## Learn More
+1. **Create Directory**: `articles/my-new-research/`
+2. **Add Metadata** (`metadata.json`):
+   ```json
+   {
+     "title": "On the Architecture of Neural Network Layers",
+     "slug": "my-new-research",
+     "author": "Billal Fauzan",
+     "created_at": "2026-06-15",
+     "updated_at": "2026-06-15",
+     "status": "published",
+     "published_at": "2026-06-15",
+     "entrypoint": "main.tex"
+   }
+   ```
+3. **Write Document** (`main.tex`): Write standard LaTeX articles. The parser supports section commands (`\section`, `\subsection`), lists (`itemize`, `enumerate`), math environments, cross-referencing (`\label`, `\ref`, `\cite`), theorem/proof definitions, and standard citations (`\bibitem`).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+First, install dependencies:
 
-## Deploy on Vercel
+```bash
+bun install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Commands
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Development Server**: `bun run dev`
+* **Build Static Site**: `bun run build` (Pre-renders all static paths in the `articles/` directory)
+* **Lint Check**: `bun run lint`
