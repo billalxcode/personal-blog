@@ -1,0 +1,59 @@
+\documentclass{article}
+
+\title{A Brief Study on Quantum Entanglement}
+\author{John Doe}
+\date{June 2025}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper explores the fundamental principles of quantum entanglement and its implications for quantum computing. We present a simplified model for understanding Bell states and their applications in quantum information theory.
+\end{abstract}
+
+\section{Introduction}
+Quantum entanglement is a phenomenon where two particles become correlated in such a way that the quantum state of one particle cannot be described independently of the other \cite{einstein1935}. This property, famously described by Einstein as ``spooky action at a distance,'' has become a cornerstone of modern quantum information science.
+
+\section{Mathematical Framework}
+Consider a two-qubit system. The Bell state $|\Phi^+\rangle$ is defined as:
+
+$$|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
+
+\begin{theorem}
+For any Bell state $|\psi\rangle$, measuring one qubit immediately determines the state of the other, regardless of spatial separation.
+\end{theorem}
+
+\begin{proof}
+Let $|\psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$. Measuring the first qubit in the computational basis yields $|0\rangle$ with probability $\frac{1}{2}$, collapsing the joint state to $|00\rangle$. Similarly, obtaining $|1\rangle$ collapses the state to $|11\rangle$. In both cases, the second qubit's state is uniquely determined.
+\end{proof}
+
+\subsection{Entanglement Entropy}
+The von Neumann entropy of the reduced density matrix $\rho_A$ quantifies entanglement:
+
+$$S(\rho_A) = -\text{Tr}(\rho_A \log_2 \rho_A)$$
+
+For a maximally entangled Bell state, $S(\rho_A) = 1$ ebit.
+
+\section{Quantum Circuit Implementation}
+We implemented the quantum circuit using standard gates:
+
+\begin{enumerate}
+\item Apply Hadamard gate $H$ to qubit 1
+\item Apply CNOT gate with qubit 1 as control
+\item Measure both qubits
+\end{enumerate}
+
+The resulting state after step 2 is:
+
+$$\text{CNOT}(H \otimes I)|00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
+
+\section{Conclusion}
+Quantum entanglement remains one of the most fascinating phenomena in physics. Its applications in quantum computing, quantum cryptography, and quantum teleportation continue to drive research forward.
+
+\begin{thebibliography}{9}
+\bibitem{einstein1935} A. Einstein, B. Podolsky, N. Rosen, \textit{Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?}, Physical Review, vol. 47, pp. 777--780, 1935.
+\bibitem{bell1964} J. S. Bell, \textit{On the Einstein Podolsky Rosen Paradox}, Physics Physique Fizika, vol. 1, no. 3, pp. 195--200, 1964.
+\bibitem{nielsen2010} M. A. Nielsen, I. L. Chuang, \textit{Quantum Computation and Quantum Information}, Cambridge University Press, 2010.
+\end{thebibliography}
+
+\end{document}
