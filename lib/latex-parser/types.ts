@@ -20,7 +20,7 @@ export interface Token {
   col: number;
 }
 
-export interface ArticleMetadata {
+export interface JournalMetadata {
   title: string;
   slug: string;
   author: string;

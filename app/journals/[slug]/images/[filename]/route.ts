@@ -10,7 +10,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   const { slug, filename } = await params;
   const imagePath = path.join(
     process.cwd(),
-    "articles",
+    "journals",
     slug,
     "images",
     filename

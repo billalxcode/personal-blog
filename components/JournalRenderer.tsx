@@ -2,12 +2,12 @@ import { tokenize } from "@/lib/latex-parser/tokenizer";
 import { parse } from "@/lib/latex-parser/parser";
 import { renderDocument } from "@/lib/latex-parser/renderer";
 
-interface ArticleRendererProps {
+interface JournalRendererProps {
   source: string;
   slug: string;
 }
 
-export function ArticleRenderer({ source, slug }: ArticleRendererProps) {
+export function JournalRenderer({ source, slug }: JournalRendererProps) {
   const tokens = tokenize(source);
   const ast = parse(tokens);
   const content = renderDocument(ast, slug);

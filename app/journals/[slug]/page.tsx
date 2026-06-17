@@ -1,8 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getArticleBySlug, getAllArticleSlugs } from "@/lib/mdx";
-import { MDXContent } from "@/components/MDXContent";
+import {
+  getJournalMetadata,
+  getJournalSource,
+  getAllJournalSlugs,
+} from "@/lib/journals";
+import { JournalRenderer } from "@/components/JournalRenderer";
 import { Footer } from "@/components/Footer";
 import { siteConfig } from "@/config/site";
 
@@ -11,7 +15,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllArticleSlugs();
+  const slugs = getAllJournalSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -19,68 +23,69 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
-  if (!article) return { title: "Not Found" };
+  const metadata = getJournalMetadata(slug);
+  if (!metadata) return { title: "Not Found" };
 
-  const { metadata } = article;
-  const articleUrl = `${siteConfig.url}/articles/${slug}`;
+  const journalUrl = `${siteConfig.url}/journals/${slug}`;
+  const journalDescription = `${metadata.title} — a research journal by ${metadata.author}`;
 
   return {
     title: metadata.title,
-    description: metadata.description,
+    description: journalDescription,
     authors: [{ name: metadata.author }],
-    keywords: metadata.tags,
     openGraph: {
       type: "article",
       title: metadata.title,
-      description: metadata.description,
-      url: articleUrl,
+      description: journalDescription,
+      url: journalUrl,
       siteName: siteConfig.title,
-      publishedTime: metadata.date,
+      publishedTime: metadata.published_at,
+      modifiedTime: metadata.updated_at,
       authors: [metadata.author],
       locale: siteConfig.locale,
-      tags: metadata.tags,
     },
     twitter: {
       card: "summary_large_image",
       title: metadata.title,
-      description: metadata.description,
+      description: journalDescription,
     },
     alternates: {
-      canonical: articleUrl,
+      canonical: journalUrl,
     },
   };
 }
 
-export default async function ArticlePage({ params }: PageProps) {
+export default async function JournalPage({ params }: PageProps) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const metadata = getJournalMetadata(slug);
 
-  if (!article || article.metadata.status !== "published") {
+  if (!metadata || metadata.status !== "published") {
     notFound();
   }
 
-  const { metadata, content } = article;
+  const source = getJournalSource(slug, metadata.entrypoint);
+  if (!source) {
+    notFound();
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "ScholarlyArticle",
     headline: metadata.title,
-    description: metadata.description,
     author: {
       "@type": "Person",
       name: metadata.author,
     },
-    datePublished: metadata.date,
-    url: `${siteConfig.url}/articles/${slug}`,
-    keywords: metadata.tags.join(", "),
+    datePublished: metadata.published_at,
+    dateModified: metadata.updated_at,
+    url: `${siteConfig.url}/journals/${slug}`,
     publisher: {
       "@type": "Person",
       name: siteConfig.author.name,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${siteConfig.url}/articles/${slug}`,
+      "@id": `${siteConfig.url}/journals/${slug}`,
     },
   };
 
@@ -99,24 +104,18 @@ export default async function ArticlePage({ params }: PageProps) {
         <header className="article-header">
           <h1 className="article-page-title">{metadata.title}</h1>
           <p className="article-page-author">{metadata.author}</p>
-          <time className="article-page-date" dateTime={metadata.date}>
-            {new Date(metadata.date).toLocaleDateString("en-US", {
+          <time
+            className="article-page-date"
+            dateTime={metadata.published_at}
+          >
+            {new Date(metadata.published_at).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
           </time>
-          {metadata.tags.length > 0 && (
-            <div className="article-page-tags">
-              {metadata.tags.map((tag) => (
-                <span key={tag} className="article-tag">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
         </header>
-        <MDXContent source={content} />
+        <JournalRenderer source={source} slug={slug} />
       </article>
       <Footer />
     </div>
