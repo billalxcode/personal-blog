@@ -1,6 +1,8 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 const mdxComponents: MDXRemoteProps["components"] = {
   h1: (props: React.ComponentProps<"h1">) => (
@@ -59,7 +61,16 @@ interface MDXContentProps {
 export function MDXContent({ source }: MDXContentProps) {
   return (
     <div className="mdx-content">
-      <MDXRemote source={source} components={mdxComponents} />
+      <MDXRemote
+        source={source}
+        components={mdxComponents}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeHighlight],
+          },
+        }}
+      />
     </div>
   );
 }
