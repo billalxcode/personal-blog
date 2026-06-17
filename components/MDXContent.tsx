@@ -99,7 +99,7 @@ const mdxComponents: MDXRemoteProps["components"] = {
     }
 
     if (
-      React.isValidElement(firstChild) &&
+      React.isValidElement<{ children?: React.ReactNode }>(firstChild) &&
       firstChild.props &&
       firstChild.props.children
     ) {
@@ -140,7 +140,7 @@ const mdxComponents: MDXRemoteProps["components"] = {
   ),
   pre: ({ children, className, ...props }: React.ComponentProps<"pre">) => {
     const childrenArray = React.Children.toArray(children);
-    const codeElement = childrenArray[0] as React.ReactElement;
+    const codeElement = childrenArray[0] as React.ReactElement<{ className?: string; children?: React.ReactNode }>;
     if (
       codeElement &&
       codeElement.props &&
