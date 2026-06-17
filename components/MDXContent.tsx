@@ -3,6 +3,7 @@ import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import MermaidWrapper from "./MermaidWrapper";
 
 const mdxComponents: MDXRemoteProps["components"] = {
   h1: (props: React.ComponentProps<"h1">) => (
@@ -33,9 +34,26 @@ const mdxComponents: MDXRemoteProps["components"] = {
   code: ({ className, ...props }: React.ComponentProps<"code">) => (
     <code className={className ? `mdx-code ${className}` : "mdx-code"} {...props} />
   ),
-  pre: ({ className, ...props }: React.ComponentProps<"pre">) => (
-    <pre className={className ? `mdx-pre ${className}` : "mdx-pre"} {...props} />
-  ),
+  pre: ({ children, className, ...props }: React.ComponentProps<"pre">) => {
+    const childrenArray = React.Children.toArray(children);
+    const codeElement = childrenArray[0] as React.ReactElement;
+    if (
+      codeElement &&
+      codeElement.props &&
+      typeof codeElement.props.className === "string" &&
+      codeElement.props.className.includes("language-mermaid")
+    ) {
+      const chartCode = typeof codeElement.props.children === "string"
+        ? codeElement.props.children
+        : "";
+      return <MermaidWrapper code={chartCode} />;
+    }
+    return (
+      <pre className={className ? `mdx-pre ${className}` : "mdx-pre"} {...props}>
+        {children}
+      </pre>
+    );
+  },
   hr: () => <hr className="mdx-hr" />,
   img: (props: React.ComponentProps<"img">) => (
     // eslint-disable-next-line @next/next/no-img-element
