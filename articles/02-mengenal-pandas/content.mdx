@@ -1,0 +1,98 @@
+---
+title: "Mengenal Lebih Dekat dengan Pandas"
+author: "Billal Fauzan"
+date: "2026-06-17 12:22:26"
+status: "published"
+description: "Mengenal lebih dekat mengenai pandas, sejarah, fundamental, dan studi kasus."
+tags: ["pandas", "data science", "python", "machine learning", "fundamental"]
+---
+
+Artikel ini hanya membahas mengenai pandas, sejarah, fundamental dan studi kasus nya. Semua tulisan ini bersumber pada [Wikipedia](https://en.wikipedia.org/wiki/Pandas_(software)). Pada artikel ini, saya buat menjadi singkat agar mudah dipahami. Mari kita bahas.
+
+# Apa itu Pandas?
+Pandas adalah sebuah pustaka perangkat lunak yang ditulis untuk bahasa pemrogramman Python, fungsi dari Pandas ini yaitu untuk melakukan manipulasi dan analisa data. Secara khusus, Pandas menawarkan struktur data dan operasi yang dapat memanipulasi tabel numerik (numeric) dan deret waktu (time series). Pandas ini rilis di bawah lisensi [BSD](https://en.wikipedia.org/wiki/3-clause_BSD_license).
+
+# Sejarah Singkat
+[Wes McKinney](https://en.wikipedia.org/wiki/Wes_McKinney) orang yang pertama kali membangun Pandas ini pada tahun 2008. Saat itu ia masih berada di [AQR Capital Management](https://en.wikipedia.org/wiki/AQR_Capital), ia mengembangkan Pandas ini karena kebutuhan akan alat berkinerja tinggi dan fleksibel untuk melakukan analisis kuantitatif pada data keuangan.
+
+# Model Data
+Pandas memiliki struktur data yang disebut `Series` dan `DataFrame`. Data untuk koleksi dapat diimport dari berbagai format seperti `CSV, JSON, Parquet, SQL, Microsoft Excel`.
+
+## Apa itu Data Series?
+Jika Anda sudah mempelajari konsep array, atau suatu nilai yang memiliki satu dimensi, maka Series itu sebuah jenis data yang mirip dengan konsep yang disebutkan tadi. Objek ini dapat menyimpan data dari berbagai tipe data (integer, float, string, dll). Series ini hanya memiliki satu kolom, yang dimana jenis ini merupakan struktur data fundamental dalam Pandas dan umum digunakan untuk manipulasi dan analisis data. Series dapat dibuat dari list, array, dictionary dan objek Series yang sudah ada.
+
+Mari kita contohkan kode series ini
+
+### Series dari List
+```python
+import pandas as pd
+
+data = [1, 2, 3, 4, 5]
+series_data = pd.Series(data)
+print(series_data)
+```
+
+Hasil kode diatas maka akan seperti di bawah
+```
+0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64
+```
+
+### Series dari Dictionary
+```python
+import pandas as pd
+
+data = {"a": 1, "b": 2, "c": 3}
+series_data = pd.Series(data)
+print(series_data)
+```
+
+Hasil kode diatas maka akan seperti di bawah
+```
+a    1
+b    2
+c    3
+dtype: int64
+```
+
+Dari kode di atas, apakah Anda sudah tahu perbedaan nya? Mari kita bahas.
+Jika Series dari list ini untuk indeks nya akan secara otomatis dibuatkan dan jenis nya itu sebuah integer dari 0 sampai panjang data, kenapa otomatis? karena list ini tidak memiliki label sebagai indeks nya, maka dibuatkan secara otomatis dari angka. Lain hal dengan Series dari dictionary, pada dictionary itu memiliki `key` sebagai indeks nya, jadi `key` itu lah yang akan digunakan sebagai indeks.
+
+## Apa itu DataFrame?
+DataFrame ini sebuah struktur data tabular dua dimensi dengan baris dan kolom. Jadi yang dimaksud dengan tabular yaitu sebuah data yang disusun dalam bentuk tabel yang terdiri dari baris (horizontal) dan kolom (vertical). Jika kamu sudah tahu spreadsheet atau table pada database relational, maka DataFrame ini mirip dengan konsep tadi, yang dimana DataFrame ini terdiri dari baris dan kolom.
+
+Mari kita contohkan, misal saya memiliki data populasi penduduk dari masing-masing provinsi yang ada di indonesia, saya ambil 5 sampel data populasi terbanyak.
+
+| Nama Provinsi  | Populasi Penduduk (Ribu Jiwa) |
+|----------------|-------------------------------|
+| Jawa Barat     | 50.345,2                      |
+| Jawa Timur     | 41.814,5                      |
+| Jawa Tengah    | 37.892,3                      |
+| Sumatera Utara | 15.588,5                      |
+
+> [!NOTE]
+> Data ini diambil berdasarkan data [Badan Pusat Statistik Provinsi Sulawesi Utara](https://sulut.bps.go.id/id/statistics-table/2/OTU4IzI=/jumlah-penduduk-menurut-provinsi-di-indonesia.html) yang terakhir diperbarui pada 20 September 2024.
+
+Contoh kode untuk data di atas yaitu:
+```python
+import pandas as pd
+data = {
+    "provinsi": ["Jawa Barat", "Jawa Timur", "Jawa Tengah", "Sumatera Utara"],
+    "populasi": [50345.2, 41814.5, 37892.3, 15588.5]
+}
+df = pd.DataFrame(data)
+df.columns = ["Nama Provinsi", "Populasi Penduduk (Ribu Jiwa)"]
+print(df)
+```
+Dari kode diatas maka akan menghasilkan output seperti di bawah ini:
+```
+    Nama Provinsi  Populasi Penduduk (Ribu Jiwa)
+0      Jawa Barat                        50345.2
+1      Jawa Timur                        41814.5
+2     Jawa Tengah                        37892.3
+3  Sumatera Utara                        15588.5
+```
