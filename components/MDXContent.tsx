@@ -30,11 +30,11 @@ const mdxComponents: MDXRemoteProps["components"] = {
   blockquote: (props: React.ComponentProps<"blockquote">) => (
     <blockquote className="mdx-blockquote" {...props} />
   ),
-  code: (props: React.ComponentProps<"code">) => (
-    <code className="mdx-code" {...props} />
+  code: ({ className, ...props }: React.ComponentProps<"code">) => (
+    <code className={className ? `mdx-code ${className}` : "mdx-code"} {...props} />
   ),
-  pre: (props: React.ComponentProps<"pre">) => (
-    <pre className="mdx-pre" {...props} />
+  pre: ({ className, ...props }: React.ComponentProps<"pre">) => (
+    <pre className={className ? `mdx-pre ${className}` : "mdx-pre"} {...props} />
   ),
   hr: () => <hr className="mdx-hr" />,
   img: (props: React.ComponentProps<"img">) => (

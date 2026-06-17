@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import "highlight.js/styles/github-dark.css";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
