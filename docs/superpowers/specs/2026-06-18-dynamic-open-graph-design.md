@@ -9,7 +9,7 @@ Saat tautan artikel dibagikan ke media sosial (seperti Twitter, LinkedIn, Discor
 Desain visual mengikuti estetika "Academic Light" yang disukai pengguna:
 * Latar belakang abu-abu terang (`#f4f4f5`) yang selaras dengan warna latar belakang halaman web.
 * Teks judul menggunakan font serif elegan (Lora) untuk mempertahankan nuansa jurnal ilmiah/akademik.
-* Footer yang menampilkan nama penulis di sebelah kiri, dan domain web (`journal.myweb.xyz`) di sebelah kanan dengan font monospace.
+* Footer yang menampilkan nama penulis di sebelah kiri, dan domain web (`masbill.xyz`) di sebelah kanan dengan font monospace.
 * Tidak ada header tambahan di bagian atas untuk menjaga tampilan tetap bersih.
 
 ## Usulan Perubahan Teknis

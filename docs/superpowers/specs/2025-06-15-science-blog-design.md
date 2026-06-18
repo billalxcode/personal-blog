@@ -10,8 +10,8 @@
 A static personal science blog built with Next.js 16, styled to resemble an IEEE academic paper. Content is authored in pure LaTeX (`.tex` files), parsed by a custom engine, and rendered to HTML with math expressions handled by KaTeX. No database — all content lives as files in the repository.
 
 **URL structure:**
-- Homepage: `www.journal.myweb.xyz/`
-- Articles: `www.journal.myweb.xyz/articles/[slug]`
+- Homepage: `https://masbill.xyz/`
+- Articles: `https://masbill.xyz/articles/[slug]`
 
 ---
 
