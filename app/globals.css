@@ -199,6 +199,16 @@ body {
   color: var(--color-secondary);
 }
 
+.footer-sitemap-link {
+  margin-left: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-sitemap-link:hover {
+  text-decoration: underline;
+}
+
 /* ========================================
    Article / Journal Detail Page
    ======================================== */
