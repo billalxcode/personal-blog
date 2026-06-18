@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = {
   title: "Journal — Billal Fauzan",
   description:
     "Research articles and projects in Machine Learning, Agentic AI, and Computer Vision by Billal Fauzan.",
-  url: "https://journal.myweb.xyz",
+  url: "https://masbill.xyz",
   locale: "en_US",
   author: {
     name: "Billal Fauzan",
@@ -58,7 +58,7 @@ export const siteConfig: SiteConfig = {
       tags: ["Agentic AI", "TypeScript", "LLMs", "Vector DB"],
       links: {
         github: "https://github.com/billalxcode/agentic-ai-framework",
-        website: "https://agentic-ai.journal.myweb.xyz",
+        website: "https://masbill.xyz",
       },
     },
     {
