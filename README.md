@@ -1,6 +1,6 @@
 # Academic Science Journal & Portfolio Blog
 
-A static personal blog and software portfolio built with Next.js 16 (App Router) and styled to resemble an **IEEE academic paper preprint**. 
+A static personal blog and software portfolio built with Next.js 16 (App Router) and styled to resemble an **IEEE academic paper preprint**.
 
 All article content is authored in pure LaTeX (`.tex`), processed by a custom server-side parsing engine, and rendered directly to static semantic HTML, using KaTeX for server-side mathematical formula rendering (zero client-side JavaScript required for content pages).
 
@@ -74,6 +74,6 @@ bun install
 
 ### Commands
 
-* **Development Server**: `bun run dev`
-* **Build Static Site**: `bun run build` (Pre-renders all static paths in the `articles/` directory)
-* **Lint Check**: `bun run lint`
+- **Development Server**: `bun run dev`
+- **Build Static Site**: `bun run build` (Pre-renders all static paths in the `articles/` directory)
+- **Lint Check**: `bun run lint`

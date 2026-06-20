@@ -305,7 +305,12 @@ export function tokenize(source: string): Token[] {
       advance();
     }
     if (text.length > 0) {
-      tokens.push({ type: "TEXT", value: text, line: startLine, col: startCol });
+      tokens.push({
+        type: "TEXT",
+        value: text,
+        line: startLine,
+        col: startCol,
+      });
     }
   }
 

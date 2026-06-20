@@ -33,9 +33,7 @@ export function parse(tokens: Token[]): DocumentNode {
 
   function matchEnvEnd(name: string): boolean {
     const t = peek();
-    return (
-      t !== undefined && t.type === "ENVIRONMENT_END" && t.value === name
-    );
+    return t !== undefined && t.type === "ENVIRONMENT_END" && t.value === name;
   }
 
   function readBraceGroupParsed(): ASTNode[] {
@@ -162,7 +160,7 @@ export function parse(tokens: Token[]): DocumentNode {
   }
 
   function parseUntil(
-    stopCondition: (next: Token | undefined) => boolean
+    stopCondition: (next: Token | undefined) => boolean,
   ): ASTNode[] {
     const list: ASTNode[] = [];
     while (index < tokens.length && !stopCondition(peek())) {
@@ -234,12 +232,9 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "COMMAND" &&
-            [
-              "section",
-              "subsection",
-              "subsubsection",
-              "bibliography",
-            ].includes(next.value)
+            ["section", "subsection", "subsubsection", "bibliography"].includes(
+              next.value,
+            ),
         );
         return {
           type: "section",
@@ -254,8 +249,8 @@ export function parse(tokens: Token[]): DocumentNode {
             next !== undefined &&
             next.type === "COMMAND" &&
             ["section", "subsection", "subsubsection", "bibliography"].includes(
-              next.value
-            )
+              next.value,
+            ),
         );
         return {
           type: "subsection",
@@ -270,8 +265,8 @@ export function parse(tokens: Token[]): DocumentNode {
             next !== undefined &&
             next.type === "COMMAND" &&
             ["section", "subsection", "subsubsection", "bibliography"].includes(
-              next.value
-            )
+              next.value,
+            ),
         );
         return {
           type: "subsubsection",
@@ -283,7 +278,7 @@ export function parse(tokens: Token[]): DocumentNode {
       // Text styling
       if (
         ["textbf", "textit", "emph", "underline", "texttt", "textrm"].includes(
-          cmdName
+          cmdName,
         )
       ) {
         const content = readBraceGroupParsed();
@@ -339,7 +334,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             ((next.type === "COMMAND" && next.value === "bibitem") ||
-              next.type === "ENVIRONMENT_END")
+              next.type === "ENVIRONMENT_END"),
         );
         return { type: "bibitem", key, content: bibContent } as BibitemNode;
       }
@@ -360,7 +355,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             ((next.type === "COMMAND" && next.value === "item") ||
-              next.type === "ENVIRONMENT_END")
+              next.type === "ENVIRONMENT_END"),
         );
         return {
           type: "item",
@@ -387,7 +382,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "document"
+            next.value === "document",
         );
         if (matchEnvEnd("document")) advance();
         return { type: "document_body", content };
@@ -398,7 +393,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "abstract"
+            next.value === "abstract",
         );
         if (matchEnvEnd("abstract")) advance();
         return { type: "abstract", content: groupParagraphs(content) };
@@ -423,14 +418,14 @@ export function parse(tokens: Token[]): DocumentNode {
       // Theorem-like environments
       if (
         ["theorem", "lemma", "definition", "corollary", "remark"].includes(
-          envName
+          envName,
         )
       ) {
         const content = parseUntil(
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === envName
+            next.value === envName,
         );
         if (matchEnvEnd(envName)) advance();
         return {
@@ -445,7 +440,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "proof"
+            next.value === "proof",
         );
         if (matchEnvEnd("proof")) advance();
         return { type: "proof", content: groupParagraphs(content) };
@@ -457,7 +452,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "itemize"
+            next.value === "itemize",
         );
         if (matchEnvEnd("itemize")) advance();
         return { type: "itemize", items: content };
@@ -467,7 +462,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "enumerate"
+            next.value === "enumerate",
         );
         if (matchEnvEnd("enumerate")) advance();
         return { type: "enumerate", items: content };
@@ -479,15 +474,13 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "figure"
+            next.value === "figure",
         );
         if (matchEnvEnd("figure")) advance();
-        const captionNode = content.find(
-          (n) => n.type === "caption"
-        ) as CaptionNode | undefined;
-        const filteredContent = content.filter(
-          (n) => n.type !== "caption"
-        );
+        const captionNode = content.find((n) => n.type === "caption") as
+          | CaptionNode
+          | undefined;
+        const filteredContent = content.filter((n) => n.type !== "caption");
         return {
           type: "figure",
           content: filteredContent,
@@ -500,15 +493,13 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "table"
+            next.value === "table",
         );
         if (matchEnvEnd("table")) advance();
-        const captionNode = content.find(
-          (n) => n.type === "caption"
-        ) as CaptionNode | undefined;
-        const filteredContent = content.filter(
-          (n) => n.type !== "caption"
-        );
+        const captionNode = content.find((n) => n.type === "caption") as
+          | CaptionNode
+          | undefined;
+        const filteredContent = content.filter((n) => n.type !== "caption");
         return {
           type: "table",
           content: filteredContent,
@@ -523,7 +514,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "tabular"
+            next.value === "tabular",
         );
         if (matchEnvEnd("tabular")) advance();
 
@@ -561,7 +552,7 @@ export function parse(tokens: Token[]): DocumentNode {
           (next) =>
             next !== undefined &&
             next.type === "ENVIRONMENT_END" &&
-            next.value === "thebibliography"
+            next.value === "thebibliography",
         );
         if (matchEnvEnd("thebibliography")) advance();
         return { type: "bibliography", items: content };
@@ -571,7 +562,7 @@ export function parse(tokens: Token[]): DocumentNode {
         (next) =>
           next !== undefined &&
           next.type === "ENVIRONMENT_END" &&
-          next.value === envName
+          next.value === envName,
       );
       if (matchEnvEnd(envName)) advance();
       return { type: "paragraph", content: groupParagraphs(content) };

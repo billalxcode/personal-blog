@@ -104,10 +104,7 @@ export default async function JournalPage({ params }: PageProps) {
         <header className="article-header">
           <h1 className="article-page-title">{metadata.title}</h1>
           <p className="article-page-author">{metadata.author}</p>
-          <time
-            className="article-page-date"
-            dateTime={metadata.published_at}
-          >
+          <time className="article-page-date" dateTime={metadata.published_at}>
             {new Date(metadata.published_at).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",

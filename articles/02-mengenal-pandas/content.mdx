@@ -110,17 +110,21 @@ Dari kode diatas maka akan menghasilkan output seperti di bawah ini:
 ```
 
 # Dasar Pandas
+
 Pandas ini sebenarnya terlalu overpower, yang dimana selain bisa melakukan manipulasi data, Pandas juga bisa dipakai untuk melakukan analisa menggunakan perhitungan matematis. Mari kita mulai dari hal yang paling sederhana dahulu yaitu Manipulasi Data, kemudian kita akan melakukan Analisa Data. Untuk melakukan praktik ini, kita akan tetap menggunakan data yang sama dengan data Populasi Terbanyak di Indonesia.
 
 ## Manipulasi Data
+
 Manipulasi data merupakan salah satu kemampuan inti dari Pandas, yang dimana kita dapat memilih, menambah, menghapus, mengurutkan sampai menyaring data dengan mudah. Mari kita coba...
 
 ### Memilih Kolom
+
 ```python
 print(df["Nama Provinsi"])
 ```
 
 Hasil dari kode diatas:
+
 ```
 0        Jawa Barat
 1        Jawa Timur
@@ -130,6 +134,7 @@ Name: Nama Provinsi, dtype: object
 ```
 
 ### Memilih Baris
+
 Pandas memiliki dua cara untuk memilih baris, yaitu menggunakan `loc` dan `iloc`. Bedanya, jika `loc` ini mengambil baris berdasarkan label index, sedangkan jika menggunakan `iloc` ini akan mengambil baris berdasarkan posisi, sama seperti slicing pada list Python biasa. Mari kita coba...
 
 ```python
@@ -137,6 +142,7 @@ print(df.loc[0:2])
 ```
 
 Hasil dari kode diatas:
+
 ```
   Nama Provinsi  Populasi Penduduk (Ribu Jiwa)
 0    Jawa Barat                        50345.2
@@ -145,11 +151,13 @@ Hasil dari kode diatas:
 ```
 
 Lalu jika menggunakan `iloc`
+
 ```python
 print(df.iloc[0:2])
 ```
 
 Hasil dari kode yang menggunakan `iloc`
+
 ```
   Nama Provinsi  Populasi Penduduk (Ribu Jiwa)
 0    Jawa Barat                        50345.2
@@ -159,14 +167,18 @@ Hasil dari kode yang menggunakan `iloc`
 Nah coba perhatikan perbedaannya, jika menggunakan `loc[0:2]` itu mengambil baris dari index 0 sampai 2, sedangkan jika menggunakan `iloc[0:2]` mengambil baris posisi dari 0 sampai 2. Dari konsep ini, banyak pengguna yang merasa kebingungan bagi pemula, termasuk saya :)
 
 ### Menambah Kolom Baru
+
 Menambah kolom baru pada DataFrame sebenarnya cukup mudah, kita perlu menyebutkan nama kolom baru lalu memberikannya nilai.
 
 Contohnya yaitu:
+
 ```python
 df["Pulau"] = ["Jawa", "Jawa", "Jawa", "Sumatera"]
 print(df)
 ```
+
 Hasil kode diatas maka akan seperti di bawah:
+
 ```
     Nama Provinsi  Populasi Penduduk (Ribu Jiwa)     Pulau
 0      Jawa Barat                        50345.2      Jawa
@@ -176,6 +188,7 @@ Hasil kode diatas maka akan seperti di bawah:
 ```
 
 ### Menghapus Kolom atau Baris
+
 Untuk menghapus kolom atau baris, kita bisa menggunakan method `drop()`. Secara default, `drop()` ini tidak mengubah DataFrame asli, melainkan mengembalikan DataFrame baru, kecuali kita menambahkan parameter `inplace=True`.
 
 ```python
@@ -184,6 +197,7 @@ print(df_baru)
 ```
 
 Hasil kode diatas maka akan seperti di bawah
+
 ```
     Nama Provinsi  Populasi Penduduk (Ribu Jiwa)
 0      Jawa Barat                        50345.2
@@ -192,7 +206,7 @@ Hasil kode diatas maka akan seperti di bawah
 3  Sumatera Utara                        15588.5
 ```
 
-Begitu juga jika kita ingin menghapus baris, kita bisa menyebutkan indeks nya saja pada paramter `index`. 
+Begitu juga jika kita ingin menghapus baris, kita bisa menyebutkan indeks nya saja pada paramter `index`.
 
 ```python
 print(df.drop(index=0))
@@ -208,6 +222,7 @@ Hasil kode diatas maka akan seperti di bawah
 ```
 
 ### Mengurutkan Data
+
 Untuk mengurutkan data, gunakan method `sort_values()` dengan menyebutkan kolom mana yang ingin dijadikan acuan urutan.
 
 ```python
@@ -215,6 +230,7 @@ print(df.sort_values(by="Nama Provinsi"))
 ```
 
 Hasil kode diatas maka akan seperti di bawah
+
 ```
 Nama Provinsi  Populasi Penduduk (Ribu Jiwa)     Pulau
 0      Jawa Barat                        50345.2      Jawa
@@ -226,6 +242,7 @@ Nama Provinsi  Populasi Penduduk (Ribu Jiwa)     Pulau
 Data diatas sekarang sudah berurutan berdasarkan abjad nama Provinsi nya.
 
 ### Menyaring Data (Filtering)
+
 Pandas memungkinkan kita menyaring baris data berdasarkan kondisi tertentu.
 
 ```python
@@ -243,9 +260,11 @@ Nama Provinsi  Populasi Penduduk (Ribu Jiwa) Pulau
 Kode diatas hanya menampilkan provinsi dengan populasi lebih dari `40.000` ribu jiwa.
 
 ## Analisa Data
+
 Selain melakukan manipulasi data, Pandas juga dapat melakukan analisa data secara cpeat, mulai dari statistik deskriptif sampai pengelompokan data.
 
 ### Statistik Deskriptif
+
 Method `describe()` akan menampilkan ringkasan statistik dari sebuah kolom numerik, seperti rata-rata, nilai minimum, nilai maksimum, dan beberapa persentil.
 
 ```python
@@ -253,6 +272,7 @@ print(df["Populasi Penduduk (Ribu Jiwa)"].describe())
 ```
 
 Hasil kode diatas maka akan seperti di bawah
+
 ```
 count        4.000000
 mean     36410.125000
@@ -266,6 +286,7 @@ Name: Populasi Penduduk (Ribu Jiwa), dtype: float64
 ```
 
 ### Mengelompokkan Data
+
 Method `groupby()` digunakan untuk mengelompokkan data berdasarkan kategori tertentu, lalu melakukan agregasi (penjumlahan, rata-rata, dll) pada masing-masing kelompok. Disini kita akan mengelompokkan data berdasarkan kolo `Pulau` yang sudah kita buat sebelumnya.
 
 ```python
@@ -284,11 +305,13 @@ Name: Populasi Penduduk (Ribu Jiwa), dtype: float64
 Dari hasil diatas terlihat jika total populasi dari sampel provinsi di Pulau Jawa jauh lebih besar dibandingkan Pulau Sumatera.
 
 # Studi Kasus
+
 Sekarang mari kita gabungkan apa yang sudah kita pelajari, kita akan menggunakan data baru yang lebih banyak agar kita dapat melakukan eksplorasi. Kita akan menggunakan data dari [Open Data Provinsi Jawa Barat](https://opendata.jabarprov.go.id), silahkan Anda download dataset [Rata-Rata Lama Sekolah Berdasarkan Provinsi di Indonesia](https://opendata.jabarprov.go.id/id/dataset/rata-rata-lama-sekolah-berdasarkan-provinsi-di-indonesia) dari tahun 2010 sampai 2024.
 
 Tujuan dari studi kasus ini yaitu kita ingin melihat sekilas tren dan perbandingan antar provinsi mengenai `Rata-Rata Lama Sekolah Berdasarkan Provinsi di Indonesia`
 
 Ada beberapa hal yang perlu kita analisa, diantaranya
+
 1. Bagaimana tren rata-rata sekolah nasional dari 2010 sampai 2024? Apakah ada peningkatan, stagnan atau menurun?
 2. Provinsi apa dengan rata-rata tertinggi dan terendah di tahun terakhir 2024?
 3. Provinsi mana yang paling meningkat pesat?
@@ -296,13 +319,16 @@ Ada beberapa hal yang perlu kita analisa, diantaranya
 5. Apakah ada perbedaan signifikan antar pulau?
 
 Kita dapat melakukan analisa data dengan acuan pertanyaan di atas. Mari kita lakukan analisa data.
+
 ## Persiapan
+
 Silahkan Anda mendownload dataset berdasarkan dataset yang sudah saya berikan di atas, pastikan Anda download datasets dalam format csv untuk mempermudah kita melakukan analisa.
 
 Sebenarnya, Pandas bisa membaca banyak jenis data seperti `CSV, Microsoft Excel, Parquet, dll`
 
 Karena saya menggunakan format csv, maka kita akan membaca data tersebut menggunakan method `read_csv()`
 Mari kita contohkan.
+
 ```python
 import pandas as pd
 df = pd.read_csv("bps-od_15058_rata_rata_lama_sekolah__prov_di_indonesia_v3_data.csv")
@@ -310,6 +336,7 @@ print(df)
 ```
 
 Hasil dari kode diatas yaitu
+
 ```
 id	kode_provinsi	nama_provinsi	rata_rata_lama_sekolah	satuan	tahun
 0	1	11	ACEH	8.28	TAHUN	2010
@@ -327,13 +354,16 @@ id	kode_provinsi	nama_provinsi	rata_rata_lama_sekolah	satuan	tahun
 ```
 
 ## Tren Nasional
+
 Kita akan analisa tren nasional dari data diatas
+
 ```python
 tren = df.groupby('tahun')['rata_rata_lama_sekolah'].mean().round(2)
 print(tren)
 ```
 
 Hasilnya yaitu
+
 ```
 tahun
 2010    7.36
@@ -357,6 +387,7 @@ Name: rata_rata_lama_sekolah, dtype: float64
 Berdasarkan dari data di atas, maka tren nya itu setiap tahun naik.
 
 ## Tertinggi dan Terendah 2024
+
 Kita akan mencari data yang paling tinggi dan paling rendah pada taun 2024
 
 ```python
@@ -368,6 +399,7 @@ print("Terendah", terendah[["nama_provinsi", "rata_rata_lama_sekolah"]])
 ```
 
 Maka hasilnya akan menjadi seperti ini
+
 ```
 Tertinggi     nama_provinsi  rata_rata_lama_sekolah
 486   DKI JAKARTA                   11.49
@@ -376,7 +408,9 @@ Terendah         nama_provinsi  rata_rata_lama_sekolah
 ```
 
 ## Peningkatan Terbesar (2010 sampai 2024)
+
 Kita akan mencari data peningkatan terbesar dari tahun 2010 sampai 2024, kita akan menggunakan kode python dibawah ini
+
 ```
 df_tahun_2010 = df[df['tahun'] == 2010]
 gabung = pd.merge(
@@ -390,6 +424,7 @@ print(gabung.nlargest(5, 'kenaikan')[['nama_provinsi', 'kenaikan']])
 ```
 
 Maka hasilnya akan menjadi seperti ini
+
 ```
           nama_provinsi  kenaikan
 23     KALIMANTAN UTARA      9.35
@@ -400,11 +435,13 @@ Maka hasilnya akan menjadi seperti ini
 ```
 
 ## Statistik Deskriptif
+
 ```python
 print(df['rata_rata_lama_sekolah'].describe())
 ```
 
 Maka hasilnya akan menjadi seperti ini
+
 ```
 count    514.000000
 mean       8.229669
@@ -418,4 +455,5 @@ Name: rata_rata_lama_sekolah, dtype: float64
 ```
 
 # Kesimpulan
+
 Pandas adalah salah satu library python yang sangat powerful untuk manipulasi dan analisa data, dengan struktur utama `Series` dan `DataFrame` yang memudahkan pengolahan data tabular. Dari contoh dan studik asus yang dibahas, terlihat bahwa Pandads dapat dipakai untuk memilih, menambah, menghapus, mengurutkan, dan menyaring data, lalu menganalisisnya lewat statistik deskriptif dan pengelompokan. studi kasus rata-rata sekolah di Indonesia juga menunjukan tren nasional yang cenderung meningkat dari tahun 2010 sampai 2024, dengan DKI Jakarta sebagai provinsi tertinggi pada tahun 2024 dan Papua Pegunungan sebagai yang terendah.

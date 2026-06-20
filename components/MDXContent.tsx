@@ -4,14 +4,23 @@ import React from "react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import MermaidWrapper from "./MermaidWrapper";
-import { Info, Lightbulb, AlertCircle, AlertTriangle, AlertOctagon } from "lucide-react";
+import {
+  Info,
+  Lightbulb,
+  AlertCircle,
+  AlertTriangle,
+  AlertOctagon,
+} from "lucide-react";
 
 interface AlertBlockProps {
   type: string;
   children: React.ReactNode;
 }
 
-const alertConfig: Record<string, { label: string; icon: React.ReactNode; className: string }> = {
+const alertConfig: Record<
+  string,
+  { label: string; icon: React.ReactNode; className: string }
+> = {
   NOTE: {
     label: "Note",
     className: "mdx-alert-note",
@@ -38,7 +47,6 @@ const alertConfig: Record<string, { label: string; icon: React.ReactNode; classN
     icon: <AlertOctagon className="mdx-alert-icon" size={16} />,
   },
 };
-
 
 function AlertBlock({ type, children }: AlertBlockProps) {
   const config = alertConfig[type] || alertConfig.NOTE;
@@ -80,12 +88,14 @@ const mdxComponents: MDXRemoteProps["components"] = {
     const { children, className, ...rest } = props;
     // Filter out empty text nodes / newlines so we grab the first actual content element
     const childrenArray = React.Children.toArray(children).filter(
-      (child) => typeof child !== "string" || child.trim() !== ""
+      (child) => typeof child !== "string" || child.trim() !== "",
     );
 
     const firstChild = childrenArray[0];
     if (typeof firstChild === "string") {
-      const match = firstChild.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/i);
+      const match = firstChild.match(
+        /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/i,
+      );
       if (match) {
         const type = match[1].toUpperCase();
         const restText = match[2];
@@ -103,23 +113,30 @@ const mdxComponents: MDXRemoteProps["components"] = {
       firstChild.props &&
       firstChild.props.children
     ) {
-      const firstChildChildren = React.Children.toArray(firstChild.props.children);
+      const firstChildChildren = React.Children.toArray(
+        firstChild.props.children,
+      );
       const firstTextNode = firstChildChildren[0];
 
       if (typeof firstTextNode === "string") {
-        const match = firstTextNode.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/i);
+        const match = firstTextNode.match(
+          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/i,
+        );
         if (match) {
           const type = match[1].toUpperCase();
           const restText = match[2];
 
           const remainingFirstChildChildren = firstChildChildren.slice(1);
-          const hasContentLeft = restText.trim() !== "" || remainingFirstChildChildren.length > 0;
+          const hasContentLeft =
+            restText.trim() !== "" || remainingFirstChildChildren.length > 0;
 
           const updatedFirstChild = hasContentLeft
             ? React.cloneElement(
                 firstChild,
                 firstChild.props,
-                restText ? [restText, ...remainingFirstChildChildren] : remainingFirstChildChildren
+                restText
+                  ? [restText, ...remainingFirstChildChildren]
+                  : remainingFirstChildChildren,
               )
             : null;
 
@@ -133,27 +150,42 @@ const mdxComponents: MDXRemoteProps["components"] = {
       }
     }
 
-    return <blockquote className={className ? `mdx-blockquote ${className}` : "mdx-blockquote"} {...rest} />;
+    return (
+      <blockquote
+        className={className ? `mdx-blockquote ${className}` : "mdx-blockquote"}
+        {...rest}
+      />
+    );
   },
   code: ({ className, ...props }: React.ComponentProps<"code">) => (
-    <code className={className ? `mdx-code ${className}` : "mdx-code"} {...props} />
+    <code
+      className={className ? `mdx-code ${className}` : "mdx-code"}
+      {...props}
+    />
   ),
   pre: ({ children, className, ...props }: React.ComponentProps<"pre">) => {
     const childrenArray = React.Children.toArray(children);
-    const codeElement = childrenArray[0] as React.ReactElement<{ className?: string; children?: React.ReactNode }>;
+    const codeElement = childrenArray[0] as React.ReactElement<{
+      className?: string;
+      children?: React.ReactNode;
+    }>;
     if (
       codeElement &&
       codeElement.props &&
       typeof codeElement.props.className === "string" &&
       codeElement.props.className.includes("language-mermaid")
     ) {
-      const chartCode = typeof codeElement.props.children === "string"
-        ? codeElement.props.children
-        : "";
+      const chartCode =
+        typeof codeElement.props.children === "string"
+          ? codeElement.props.children
+          : "";
       return <MermaidWrapper code={chartCode} />;
     }
     return (
-      <pre className={className ? `mdx-pre ${className}` : "mdx-pre"} {...props}>
+      <pre
+        className={className ? `mdx-pre ${className}` : "mdx-pre"}
+        {...props}
+      >
         {children}
       </pre>
     );

@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: RouteProps) {
     "journals",
     slug,
     "images",
-    filename
+    filename,
   );
 
   if (!fs.existsSync(imagePath)) {

@@ -24,7 +24,7 @@ interface ArticleFrontmatter {
 }
 
 export function getArticleBySlug(
-  slug: string
+  slug: string,
 ): { metadata: ArticleMetadata; content: string } | null {
   try {
     const articleDir = path.join(ARTICLES_DIR, slug);

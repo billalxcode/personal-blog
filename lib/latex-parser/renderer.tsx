@@ -47,7 +47,7 @@ function toAlpha(num: number): string {
 
 export function renderDocument(
   doc: DocumentNode,
-  slug: string
+  slug: string,
 ): React.ReactNode {
   const labelMap = new Map<string, string>();
   const citationMap = new Map<string, number>();
@@ -195,19 +195,17 @@ export function renderDocument(
 function renderNodes(
   nodes: ASTNode[],
   state: RenderState,
-  slug: string
+  slug: string,
 ): React.ReactNode {
   return nodes.map((node, index) => (
-    <React.Fragment key={index}>
-      {renderNode(node, state, slug)}
-    </React.Fragment>
+    <React.Fragment key={index}>{renderNode(node, state, slug)}</React.Fragment>
   ));
 }
 
 function renderNode(
   node: ASTNode,
   state: RenderState,
-  slug: string
+  slug: string,
 ): React.ReactNode {
   if (!node) return null;
 

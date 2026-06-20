@@ -2,7 +2,7 @@ import katex from "katex";
 
 export function renderMath(
   latex: string,
-  options: { displayMode?: boolean; throwOnError?: boolean } = {}
+  options: { displayMode?: boolean; throwOnError?: boolean } = {},
 ): string {
   const { displayMode = false, throwOnError = false } = options;
   try {

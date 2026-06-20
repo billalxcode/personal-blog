@@ -262,4 +262,3 @@ export type ASTNode =
   | NewlineNode
   | DocumentBodyNode
   | CaptionNode;
-

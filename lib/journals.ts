@@ -18,7 +18,7 @@ export function getJournalMetadata(slug: string): JournalMetadata | null {
 
 export function getJournalSource(
   slug: string,
-  entrypoint: string
+  entrypoint: string,
 ): string | null {
   try {
     const sourcePath = path.join(JOURNALS_DIR, slug, entrypoint);

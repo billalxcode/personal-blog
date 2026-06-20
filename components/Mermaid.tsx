@@ -32,7 +32,8 @@ export default function Mermaid({ code }: MermaidProps) {
       } catch (err) {
         console.error("Mermaid render error:", err);
         if (active) {
-          const errorMessage = err instanceof Error ? err.message : "Failed to render diagram";
+          const errorMessage =
+            err instanceof Error ? err.message : "Failed to render diagram";
           setError(errorMessage);
         }
       }
@@ -62,7 +63,10 @@ export default function Mermaid({ code }: MermaidProps) {
 
   return (
     <div className="flex justify-center my-6 overflow-x-auto w-full">
-      <div className="w-full flex justify-center" dangerouslySetInnerHTML={{ __html: svg }} />
+      <div
+        className="w-full flex justify-center"
+        dangerouslySetInnerHTML={{ __html: svg }}
+      />
     </div>
   );
 }
