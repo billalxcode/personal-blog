@@ -1,10 +1,10 @@
 {
-  "title": "A Brief Study on Quantum Entanglement",
-  "slug": "quantum-entanglement",
-  "author": "John Doe",
-  "created_at": "2025-06-01",
-  "updated_at": "2025-06-15",
+  "title": "Hello world",
+  "slug": "01-hello-world",
+  "author": "Billal Fauzan",
+  "created_at": "2026-06-15",
+  "updated_at": "2026-06-20",
   "status": "published",
-  "published_at": "2025-06-15",
+  "published_at": "2026-06-15",
   "entrypoint": "main.tex"
 }
