@@ -353,3 +353,69 @@ tahun
 2024    8.84
 Name: rata_rata_lama_sekolah, dtype: float64
 ```
+
+Berdasarkan dari data di atas, maka tren nya itu setiap tahun naik.
+
+## Tertinggi dan Terendah 2024
+Kita akan mencari data yang paling tinggi dan paling rendah pada taun 2024
+
+```python
+df_tahun_2024 = df[df["tahun"] == 2024]
+tertinggi = df_tahun_2024.nlargest(1, "rata_rata_lama_sekolah")
+terendah = df_tahun_2024.nsmallest(1, "rata_rata_lama_sekolah")
+print("Tertinggi", tertinggi[["nama_provinsi", "rata_rata_lama_sekolah"]])
+print("Terendah", terendah[["nama_provinsi", "rata_rata_lama_sekolah"]])
+```
+
+Maka hasilnya akan menjadi seperti ini
+```
+Tertinggi     nama_provinsi  rata_rata_lama_sekolah
+486   DKI JAKARTA                   11.49
+Terendah         nama_provinsi  rata_rata_lama_sekolah
+513  PAPUA PEGUNUNGAN                    4.21
+```
+
+## Peningkatan Terbesar (2010 sampai 2024)
+Kita akan mencari data peningkatan terbesar dari tahun 2010 sampai 2024, kita akan menggunakan kode python dibawah ini
+```
+df_tahun_2010 = df[df['tahun'] == 2010]
+gabung = pd.merge(
+    df_tahun_2010[['kode_provinsi', 'nama_provinsi', 'rata_rata_lama_sekolah']],
+    df_tahun_2024[['kode_provinsi', 'rata_rata_lama_sekolah']],
+    on='kode_provinsi',
+    suffixes=('_2010', '_2024')
+)
+gabung['kenaikan'] = gabung['rata_rata_lama_sekolah_2024'] - gabung['rata_rata_lama_sekolah_2010']
+print(gabung.nlargest(5, 'kenaikan')[['nama_provinsi', 'kenaikan']])
+```
+
+Maka hasilnya akan menjadi seperti ini
+```
+          nama_provinsi  kenaikan
+23     KALIMANTAN UTARA      9.35
+33                PAPUA      4.23
+17  NUSA TENGGARA BARAT      2.14
+27    SULAWESI TENGGARA      1.85
+16                 BALI      1.80
+```
+
+## Statistik Deskriptif
+```python
+print(df['rata_rata_lama_sekolah'].describe())
+```
+
+Maka hasilnya akan menjadi seperti ini
+```
+count    514.000000
+mean       8.229669
+std        1.233677
+min        0.000000
+25%        7.562500
+50%        8.270000
+75%        8.947500
+max       11.490000
+Name: rata_rata_lama_sekolah, dtype: float64
+```
+
+# Kesimpulan
+Pandas adalah salah satu library python yang sangat powerful untuk manipulasi dan analisa data, dengan struktur utama `Series` dan `DataFrame` yang memudahkan pengolahan data tabular. Dari contoh dan studik asus yang dibahas, terlihat bahwa Pandads dapat dipakai untuk memilih, menambah, menghapus, mengurutkan, dan menyaring data, lalu menganalisisnya lewat statistik deskriptif dan pengelompokan. studi kasus rata-rata sekolah di Indonesia juga menunjukan tren nasional yang cenderung meningkat dari tahun 2010 sampai 2024, dengan DKI Jakarta sebagai provinsi tertinggi pada tahun 2024 dan Papua Pegunungan sebagai yang terendah.
