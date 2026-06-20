@@ -1,5 +1,7 @@
+import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
-import { getArticleBySlug } from "@/lib/mdx";
+import { getArticleBySlug, getAllArticleSlugs } from "@/lib/mdx";
 import { siteConfig } from "@/config/site";
 
 export const alt = "Journal Article Open Graph Image";
@@ -13,6 +15,11 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const slugs = getAllArticleSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
 export default async function Image({ params }: Props) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
@@ -21,15 +28,13 @@ export default async function Image({ params }: Props) {
   const author = article?.metadata.author || siteConfig.author.name;
   const domain = siteConfig.url.replace(/^https?:\/\//, "");
 
-  // Mengunduh font Lora (Variable Font) yang berisi wght 400 dan 700
-  const loraFontData = await fetch(
-    new URL(
-      "https://github.com/google/fonts/raw/main/ofl/lora/Lora%5Bwght%5D.ttf",
-    ),
-  ).then((res) => {
-    if (!res.ok) throw new Error("Failed to load Lora font");
-    return res.arrayBuffer();
-  });
+  // Membaca font Lora secara lokal dari assets/fonts/
+  const loraRegularData = await readFile(
+    join(process.cwd(), "assets/fonts/Lora-Regular.ttf")
+  );
+  const loraBoldData = await readFile(
+    join(process.cwd(), "assets/fonts/Lora-Bold.ttf")
+  );
 
   return new ImageResponse(
     <div
@@ -96,13 +101,13 @@ export default async function Image({ params }: Props) {
       fonts: [
         {
           name: "Lora",
-          data: loraFontData,
+          data: loraRegularData,
           style: "normal",
           weight: 400,
         },
         {
           name: "Lora",
-          data: loraFontData,
+          data: loraBoldData,
           style: "normal",
           weight: 700,
         },
