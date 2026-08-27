@@ -89,6 +89,16 @@ export default async function JournalPage({ params }: PageProps) {
     },
   };
 
+  const published = new Date(metadata.published_at).toLocaleDateString(
+    "en-US",
+    { year: "numeric", month: "long", day: "numeric" },
+  );
+  const updated = new Date(metadata.updated_at).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className="page-container">
       <script
@@ -97,20 +107,26 @@ export default async function JournalPage({ params }: PageProps) {
       />
       <nav aria-label="Breadcrumb">
         <Link href="/" className="back-link">
-          ← Back to home
+          ← Back to contents
         </Link>
       </nav>
+      <div className="paper-folio" aria-hidden="true">
+        <span className="paper-folio__left">Journal — Preprint</span>
+        <span className="paper-folio__right">
+          {siteConfig.title} · {published}
+        </span>
+      </div>
       <article>
         <header className="article-header">
           <h1 className="article-page-title">{metadata.title}</h1>
           <p className="article-page-author">{metadata.author}</p>
           <time className="article-page-date" dateTime={metadata.published_at}>
-            {new Date(metadata.published_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {published}
           </time>
+          <div className="paper-history">
+            Manuscript received {published} · Revised {updated} · Published{" "}
+            {published} · Correspondence: {siteConfig.author.email}
+          </div>
         </header>
         <JournalRenderer source={source} slug={slug} />
       </article>

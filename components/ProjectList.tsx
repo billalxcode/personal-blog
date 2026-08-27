@@ -10,7 +10,10 @@ export function ProjectList() {
 
   return (
     <section className="project-section">
-      <h2 className="section-title">Projects & Systems</h2>
+      <h2 className="section-title">
+        <span className="section-title__num">III.</span> Systems{" "}
+        <span className="section-title__count">— {projects.length}</span>
+      </h2>
       <div className="project-grid">
         {projects.map((project, idx) => (
           <div key={idx} className="project-card">
@@ -19,7 +22,7 @@ export function ProjectList() {
                 src={project.image}
                 alt={project.title}
                 fill
-                sizes="(max-width: 720px) 100vw, 180px"
+                sizes="(max-width: 720px) 100vw, 140px"
                 className="project-thumbnail-image"
               />
             </div>

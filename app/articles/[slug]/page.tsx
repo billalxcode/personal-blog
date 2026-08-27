@@ -84,6 +84,12 @@ export default async function ArticlePage({ params }: PageProps) {
     },
   };
 
+  const formattedDate = new Date(metadata.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className="page-container">
       <script
@@ -92,20 +98,31 @@ export default async function ArticlePage({ params }: PageProps) {
       />
       <nav aria-label="Breadcrumb">
         <Link href="/" className="back-link">
-          ← Back to home
+          ← Back to contents
         </Link>
       </nav>
+      <div className="paper-folio" aria-hidden="true">
+        <span className="paper-folio__left">Article — Preprint</span>
+        <span className="paper-folio__right">
+          masbill.xyz · {formattedDate}
+        </span>
+      </div>
       <article>
         <header className="article-header">
           <h1 className="article-page-title">{metadata.title}</h1>
           <p className="article-page-author">{metadata.author}</p>
           <time className="article-page-date" dateTime={metadata.date}>
-            {new Date(metadata.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {formattedDate}
           </time>
+          <div className="paper-history">
+            Manuscript received {formattedDate} · Published {formattedDate} ·
+            Correspondence: {siteConfig.author.email}
+          </div>
+          {metadata.description && (
+            <div className="paper-lead">
+              <strong>Abstract—</strong> {metadata.description}
+            </div>
+          )}
           {metadata.tags.length > 0 && (
             <div className="article-page-tags">
               {metadata.tags.map((tag) => (

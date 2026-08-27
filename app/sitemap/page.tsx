@@ -10,30 +10,27 @@ export default function SitemapPage() {
   return (
     <div className="page-container">
       <Link href="/" className="back-link">
-        ← Back to Home
+        ← Back to contents
       </Link>
+      <div className="paper-folio" aria-hidden="true">
+        <span className="paper-folio__left">Index — Sitemap</span>
+        <span className="paper-folio__right">masbill.xyz</span>
+      </div>
       <main className="latex-article">
-        <h1
-          className="article-page-title"
-          style={{ textAlign: "center", marginBottom: "var(--space-md)" }}
-        >
-          SITEMAP
-        </h1>
-        <p
-          className="article-page-date"
-          style={{
-            textAlign: "center",
-            fontStyle: "italic",
-            marginBottom: "var(--space-xl)",
-          }}
-        >
-          Index of all pages on masbill.xyz
-        </p>
+        <header className="article-header">
+          <h1 className="article-page-title">Sitemap</h1>
+          <p className="article-page-date">Index of all pages on masbill.xyz</p>
+        </header>
 
         <section aria-label="Sitemap Sections">
-          <h2 className="section-title">Main Pages</h2>
-          <ul className="latex-list">
+          <h2 className="section-title">
+            <span className="section-title__num">—</span> Main Pages
+          </h2>
+          <ul className="article-list">
             <li className="article-list-item">
+              <div className="article-list__num" aria-hidden="true">
+                01
+              </div>
               <Link href="/" className="article-title-link">
                 Homepage
               </Link>
@@ -44,13 +41,16 @@ export default function SitemapPage() {
             </li>
           </ul>
 
-          <h2 className="section-title">Articles</h2>
-          <ul
-            className="latex-list"
-            style={{ listStyle: "none", paddingLeft: 0 }}
-          >
-            {articles.map((article) => (
+          <h2 className="section-title">
+            <span className="section-title__num">I.</span> Articles{" "}
+            <span className="section-title__count">— {articles.length}</span>
+          </h2>
+          <ul className="article-list">
+            {articles.map((article, idx) => (
               <li key={article.slug} className="article-list-item">
+                <div className="article-list__num" aria-hidden="true">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
                 <Link
                   href={`/articles/${article.slug}`}
                   className="article-title-link"
@@ -58,7 +58,7 @@ export default function SitemapPage() {
                   {article.title}
                 </Link>
                 <div className="article-meta">
-                  <span>By {article.author || "Billal Fauzan"}</span> •{" "}
+                  <span>{article.author || "Billal Fauzan"}</span> ·{" "}
                   <time dateTime={article.date}>
                     {new Date(article.date).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -71,13 +71,16 @@ export default function SitemapPage() {
             ))}
           </ul>
 
-          <h2 className="section-title">Journals</h2>
-          <ul
-            className="latex-list"
-            style={{ listStyle: "none", paddingLeft: 0 }}
-          >
-            {journals.map((journal) => (
+          <h2 className="section-title">
+            <span className="section-title__num">II.</span> Journals{" "}
+            <span className="section-title__count">— {journals.length}</span>
+          </h2>
+          <ul className="article-list">
+            {journals.map((journal, idx) => (
               <li key={journal.slug} className="article-list-item">
+                <div className="article-list__num" aria-hidden="true">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
                 <Link
                   href={`/journals/${journal.slug}`}
                   className="article-title-link"
@@ -85,7 +88,7 @@ export default function SitemapPage() {
                   {journal.title}
                 </Link>
                 <div className="article-meta">
-                  <span>By {journal.author}</span> •{" "}
+                  <span>{journal.author}</span> ·{" "}
                   <time dateTime={journal.published_at}>
                     {new Date(journal.published_at).toLocaleDateString(
                       "en-US",

@@ -8,7 +8,17 @@ interface ArticleListProps {
 export function ArticleList({ articles }: ArticleListProps) {
   if (articles.length === 0) {
     return (
-      <p style={{ textAlign: "center", color: "#666" }}>
+      <p
+        style={{
+          textAlign: "center",
+          fontStyle: "italic",
+          fontSize: "0.85rem",
+          color: "#444",
+          padding: "12px 0",
+          borderTop: "1px solid #e5e5e5",
+          borderBottom: "1px solid #e5e5e5",
+        }}
+      >
         No articles published yet.
       </p>
     );
@@ -16,8 +26,11 @@ export function ArticleList({ articles }: ArticleListProps) {
 
   return (
     <ul className="article-list" role="list">
-      {articles.map((article) => (
+      {articles.map((article, idx) => (
         <li key={article.slug} className="article-list-item">
+          <div className="article-list__num" aria-hidden="true">
+            {String(idx + 1).padStart(2, "0")}
+          </div>
           <Link
             href={`/articles/${article.slug}`}
             className="article-title-link"

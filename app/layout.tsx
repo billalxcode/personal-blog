@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/github.css";
 import { siteConfig } from "@/config/site";
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -66,7 +74,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={ibmPlexMono.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -74,6 +82,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen">
+        <div className="running-header" aria-hidden="true">
+          <span className="running-header__left">
+            {siteConfig.title} — Preprint
+          </span>
+          <span className="running-header__right">
+            masbill.xyz · {new Date().getFullYear()}
+          </span>
+        </div>
         {children}
         <Analytics />
       </body>
