@@ -420,7 +420,7 @@ function renderNode(
     case "image": {
       const imageUrl = node.src.startsWith("/")
         ? node.src
-        : `/articles/${slug}/images/${node.src}`;
+        : `/journals/${slug}/images/${node.src}`;
       return (
         <div className="relative w-full h-[400px] my-4">
           <Image

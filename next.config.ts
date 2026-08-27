@@ -11,16 +11,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  transpilePackages: ["next-mdx-remote"],
-  async redirects() {
-    return [
-      {
-        source: "/articles/quantum-entanglement",
-        destination: "/journals/quantum-entanglement",
-        permanent: true,
-      },
-    ];
-  },
+  transpilePackages: ["next-mdx-remote"]
 };
 
 export default nextConfig;
