@@ -1,6 +1,36 @@
 @import "katex/dist/katex.min.css";
 @import "tailwindcss";
 
+/* Times New Roman — local from public/fonts/times.ttf */
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/times.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/times.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/times.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/times.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ========================================
    IEEE Preprint — Design Tokens
    B&W only. No AI card, no shadow, no color accents.
@@ -56,7 +86,7 @@ html {
 }
 
 body {
-  font-family: "STIX Two Text", "Times New Roman", Times, Georgia, serif;
+  font-family: "Times New Roman", Times, Georgia, serif;
   color: var(--ink);
   background: var(--paper);
   line-height: 1.55;
@@ -400,7 +430,7 @@ body {
   text-transform: none;
   letter-spacing: 0;
   margin-right: 6px;
-  font-family: "STIX Two Text", Georgia, serif;
+  font-family: "Times New Roman", Times, Georgia, serif;
   font-size: 0.7rem;
   color: var(--ink);
 }
@@ -441,7 +471,7 @@ body {
   text-transform: none;
   letter-spacing: 0;
   margin-right: 6px;
-  font-family: "STIX Two Text", Georgia, serif;
+  font-family: "Times New Roman", Times, Georgia, serif;
 }
 
 /* ========================================
@@ -488,7 +518,7 @@ body {
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
-  font-family: "STIX Two Text", serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 0.62rem;
 }
 
@@ -1024,7 +1054,7 @@ code {
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
-  font-family: "STIX Two Text", serif;
+  font-family: "Times New Roman", Times, serif;
   margin-right: 4px;
   color: var(--ink);
 }
@@ -1138,19 +1168,101 @@ code {
   text-decoration-thickness: 1.2px;
 }
 
+.mdx-ul,
+.mdx-ol {
+  margin: 10px 0 14px 0;
+  padding-left: 1.7rem;
+  font-size: 0.9375rem;
+}
+
 .mdx-ul {
-  list-style-type: square;
-  margin: 8px 0 12px 1.4rem;
+  list-style-type: disc;
+  list-style-position: outside;
 }
 
 .mdx-ol {
   list-style-type: decimal;
-  margin: 8px 0 12px 1.4rem;
+  list-style-position: outside;
+}
+
+/* Nested levels — clear visual hierarchy like paper */
+.mdx-ul .mdx-ul {
+  list-style-type: circle;
+  margin: 6px 0 6px 0;
+  padding-left: 1.5rem;
+}
+
+.mdx-ul .mdx-ul .mdx-ul,
+.mdx-ol .mdx-ul .mdx-ul {
+  list-style-type: square;
+}
+
+.mdx-ol .mdx-ol {
+  list-style-type: lower-alpha;
+  margin: 6px 0 6px 0;
+  padding-left: 1.5rem;
+}
+
+.mdx-ol .mdx-ol .mdx-ol,
+.mdx-ul .mdx-ol .mdx-ol {
+  list-style-type: lower-roman;
+}
+
+/* Third level mixed */
+.mdx-ul .mdx-ol,
+.mdx-ol .mdx-ul {
+  margin: 6px 0 6px 0;
+  padding-left: 1.5rem;
 }
 
 .mdx-li {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  padding-left: 0.15rem;
   text-align: justify;
+  hyphens: auto;
+  line-height: 1.6;
+}
+
+.mdx-li::marker {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.78em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.mdx-ul > .mdx-li::marker {
+  font-size: 0.85em;
+}
+
+/* Paragraph inside li — no extra block gap like paper */
+.mdx-li > p,
+.mdx-li > .mdx-p {
+  margin-bottom: 0.45em;
+  text-align: inherit;
+}
+
+.mdx-li > p:last-child,
+.mdx-li > .mdx-p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tighten when li contains only text */
+.mdx-li > ul,
+.mdx-li > ol {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+/* Task lists (GFM: - [ ] ) */
+.mdx-li input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--ink);
+  transform: translateY(1px);
+}
+
+/* Hanging indent for long wrapped lines read like paper */
+.mdx-ul, .mdx-ol {
+  hanging-punctuation: first;
 }
 
 .mdx-blockquote {
