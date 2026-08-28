@@ -12,7 +12,7 @@ export function ProjectList() {
     <section className="project-section">
       <h2 className="section-title">
         <span className="section-title__num">III.</span> Systems{" "}
-        <span className="section-title__count">— {projects.length}</span>
+        <span className="section-title__count">- {projects.length}</span>
       </h2>
       <div className="project-grid">
         {projects.map((project, idx) => (

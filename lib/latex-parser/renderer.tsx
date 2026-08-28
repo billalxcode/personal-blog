@@ -261,7 +261,7 @@ function renderNode(
     case "abstract":
       return (
         <div className="abstract">
-          <span className="abstract-label">Abstract—</span>
+          <span className="abstract-label">Abstract:</span>
           {renderNodes(node.content, state, slug)}
         </div>
       );

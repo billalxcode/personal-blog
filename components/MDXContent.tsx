@@ -71,6 +71,9 @@ const mdxComponents: MDXRemoteProps["components"] = {
   h3: (props: React.ComponentProps<"h3">) => (
     <h3 className="mdx-h3" {...props} />
   ),
+  h4: (props: React.ComponentProps<"h4">) => (
+    <h4 className="mdx-h4" {...props} />
+  ),
   p: (props: React.ComponentProps<"p">) => <p className="mdx-p" {...props} />,
   a: (props: React.ComponentProps<"a">) => (
     <a className="mdx-a" target="_blank" rel="noopener noreferrer" {...props} />

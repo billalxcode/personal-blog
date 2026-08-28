@@ -13,7 +13,7 @@ export default function SitemapPage() {
         ← Back to contents
       </Link>
       <div className="paper-folio" aria-hidden="true">
-        <span className="paper-folio__left">Index — Sitemap</span>
+        <span className="paper-folio__left">Index - Sitemap</span>
         <span className="paper-folio__right">masbill.xyz</span>
       </div>
       <main className="latex-article">
@@ -24,7 +24,7 @@ export default function SitemapPage() {
 
         <section aria-label="Sitemap Sections">
           <h2 className="section-title">
-            <span className="section-title__num">—</span> Main Pages
+            <span className="section-title__num">-</span> Main Pages
           </h2>
           <ul className="article-list">
             <li className="article-list-item">
@@ -43,7 +43,7 @@ export default function SitemapPage() {
 
           <h2 className="section-title">
             <span className="section-title__num">I.</span> Articles{" "}
-            <span className="section-title__count">— {articles.length}</span>
+            <span className="section-title__count">- {articles.length}</span>
           </h2>
           <ul className="article-list">
             {articles.map((article, idx) => (
@@ -73,7 +73,7 @@ export default function SitemapPage() {
 
           <h2 className="section-title">
             <span className="section-title__num">II.</span> Journals{" "}
-            <span className="section-title__count">— {journals.length}</span>
+            <span className="section-title__count">- {journals.length}</span>
           </h2>
           <ul className="article-list">
             {journals.map((journal, idx) => (

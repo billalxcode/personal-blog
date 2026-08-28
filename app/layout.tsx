@@ -84,7 +84,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <div className="running-header" aria-hidden="true">
           <span className="running-header__left">
-            {siteConfig.title} — Preprint
+            {siteConfig.title} - Preprint
           </span>
           <span className="running-header__right">
             masbill.xyz · {new Date().getFullYear()}

@@ -1,4 +1,4 @@
-# Science Blog — Design Specification
+# Science Blog - Design Specification
 
 **Date:** 2025-06-15  
 **Status:** Approved  
@@ -7,7 +7,7 @@
 
 ## 1. Overview
 
-A static personal science blog built with Next.js 16, styled to resemble an IEEE academic paper. Content is authored in pure LaTeX (`.tex` files), parsed by a custom engine, and rendered to HTML with math expressions handled by KaTeX. No database — all content lives as files in the repository.
+A static personal science blog built with Next.js 16, styled to resemble an IEEE academic paper. Content is authored in pure LaTeX (`.tex` files), parsed by a custom engine, and rendered to HTML with math expressions handled by KaTeX. No database - all content lives as files in the repository.
 
 **URL structure:**
 - Homepage: `https://masbill.xyz/`
@@ -20,12 +20,12 @@ A static personal science blog built with Next.js 16, styled to resemble an IEEE
 ```
 personal-blog/
 ├── app/
-│   ├── layout.tsx              # Root layout — serif font, B&W theme
-│   ├── page.tsx                # Homepage — author profile + article list + footer
+│   ├── layout.tsx              # Root layout - serif font, B&W theme
+│   ├── page.tsx                # Homepage - author profile + article list + footer
 │   ├── globals.css             # IEEE-style CSS
 │   └── articles/
 │       └── [slug]/
-│           └── page.tsx        # Article page — reads .tex, renders
+│           └── page.tsx        # Article page - reads .tex, renders
 ├── articles/                   # Content directory (project root)
 │   └── [slug]/
 │       ├── metadata.json       # Article metadata
@@ -90,16 +90,16 @@ Fields:
 ### 4.2 Tokenizer
 
 Breaks `.tex` source into tokens:
-- `COMMAND` — `\section`, `\textbf`, etc.
-- `BRACE_GROUP` — `{...}` arguments
-- `BRACKET_GROUP` — `[...]` optional arguments
-- `MATH_INLINE` — `$...$`
-- `MATH_DISPLAY` — `$$...$$` or `\[...\]`
-- `ENVIRONMENT_BEGIN` — `\begin{...}`
-- `ENVIRONMENT_END` — `\end{...}`
-- `TEXT` — plain text content
-- `COMMENT` — `% ...` (discarded)
-- `NEWLINE` — paragraph breaks (double newline)
+- `COMMAND` - `\section`, `\textbf`, etc.
+- `BRACE_GROUP` - `{...}` arguments
+- `BRACKET_GROUP` - `[...]` optional arguments
+- `MATH_INLINE` - `$...$`
+- `MATH_DISPLAY` - `$$...$$` or `\[...\]`
+- `ENVIRONMENT_BEGIN` - `\begin{...}`
+- `ENVIRONMENT_END` - `\end{...}`
+- `TEXT` - plain text content
+- `COMMENT` - `% ...` (discarded)
+- `NEWLINE` - paragraph breaks (double newline)
 
 ### 4.3 Supported LaTeX Commands
 
@@ -162,11 +162,11 @@ Commands not in the supported list are silently ignored (logged in development m
 ## 5. Styling & Layout
 
 ### 5.1 Typography
-- **Font family:** Serif — Computer Modern-like web font (STIX Two Text or Latin Modern, fallback to Georgia, Times New Roman, serif)
+- **Font family:** Serif - Computer Modern-like web font (STIX Two Text or Latin Modern, fallback to Georgia, Times New Roman, serif)
 - **Body text:** ~16px, justified
 - **Title:** Bold, centered, ~24px
 - **Author:** Centered, ~16px
-- **Abstract:** Indented block, label "Abstract—" in bold
+- **Abstract:** Indented block, label "Abstract-" in bold
 - **Code/monospace:** `\texttt` uses monospace font
 
 ### 5.2 Layout
@@ -182,9 +182,9 @@ Commands not in the supported list are silently ignored (logged in development m
 - No accent colors
 
 ### 5.4 IEEE Section Numbering
-- Sections: Roman numerals — `I.`, `II.`, `III.`
-- Subsections: Capital letters — `A.`, `B.`, `C.`
-- Subsubsections: Arabic numerals — `1)`, `2)`, `3)`
+- Sections: Roman numerals - `I.`, `II.`, `III.`
+- Subsections: Capital letters - `A.`, `B.`, `C.`
+- Subsubsections: Arabic numerals - `1)`, `2)`, `3)`
 
 ### 5.5 Special Elements
 - **Equations:** Centered, right-aligned number `(1)`, `(2)`
@@ -216,7 +216,7 @@ Three sections stacked vertically:
 ## 7. Rendering Strategy
 
 - **Static Generation:** Uses `generateStaticParams()` to pre-render all published articles at build time
-- **Server-side parsing:** LaTeX is parsed and rendered on the server — zero client-side JavaScript for content
+- **Server-side parsing:** LaTeX is parsed and rendered on the server - zero client-side JavaScript for content
 - **KaTeX SSR:** Math rendered server-side via `katex.renderToString()`
 - **Images:** Referenced from `articles/[slug]/images/`, served via Next.js public directory or custom route handler
 
@@ -224,7 +224,7 @@ Three sections stacked vertically:
 
 ## 8. Dependencies
 
-- `katex` — Math rendering engine
+- `katex` - Math rendering engine
 - No other runtime dependencies beyond Next.js/React
 
 ---

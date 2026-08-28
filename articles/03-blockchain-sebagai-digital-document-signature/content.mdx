@@ -9,52 +9,72 @@ tags: ["blockchain", "document", "signature", "proof-of-concept", "hyperledger"]
 
 Mari kita bahas secara singkat **Penerapan Blockchain sebagai Digital Document Signature**. Saya akan mengambil studi kasus pada **pengesahan dan verifikasi dokumen administrasi perguruan tinggi**.
 
-**Note:** studi ini merupakan studi literatur pribadi untuk mempelajari dan menerapkan blockchain sebagai digital document signature khusus-Nya pada studi kasus pengesahan dan verifikasi dokumen administrasi perguruan tinggi.
+> [!NOTE]
+> Studi ini merupakan studi literatur pribadi untuk mempelajari dan menerapkan blockchain sebagai digital document signature khusus-Nya pada studi kasus pengesahan dan verifikasi dokumen administrasi perguruan tinggi.
 
 # Pendahuluan
-Proses pengesahan dan verifikasi dokumen akademik, merupakan salah satu pilar krusial dalam menentukan validasi dan kredibilitas sistem pendidikan secara global. Namun sistem administrasi pengesahan dan verifikasi dokumen konvensional yang berbasis dokumen fisik atau basis data digital terpusat saat ini menghadapi berbagai tantangan administratif dan kerentanan keamanan yang signifikan. Berikut adalah tantangan administratif dan kerentanan keamanan:
+
+Proses pengesahan dan verifikasi dokumen akademik, merupakan salah satu pilar krusial dalam menentukan validasi dan kredibilitas sistem pendidikan secara global. Namun sistem administrasi pengesahan dan verifikasi dokumen konvensional yang berbasis dokumen fisik atau basis data digital terpusat saat ini menghadapi berbagai tantangan administratif dan kerentanan keamanan yang signifikan.
+
+Berikut adalah tantangan administratif dan kerentanan keamanan:
 
 ## Kemudahan Pemalsuan Dokumen Fisik
+
 <a href="https://suarantb.com/2026/06/17/stie-amm-mataram-temukan-dugaan-penggunaan-dokumen-akademik-tidak-sah-oleh-sejumlah-pihak-untuk-keperluan-alih-jenjang-pendidikan/">
-<img src="https://fast.image.delivery/tvxsfao.png" alt="Berita Pemalsuan Dokumen Akademik Terbaru" width="300" />
+  <img src="https://fast.image.delivery/tvxsfao.png" alt="Berita Pemalsuan Dokumen Akademik Terbaru" width="300" />
 </a>
+
 Metode pengamanan tradisional seperti cap tempel, hologram, dan tanda tangan basah pejabat berwenang terbukti sangat rentang karena sangat mudah direplika dan dipalsukan. Hal ini memicu marak-Nya peredaran dokumen akademik palsu oleh organisasi ilegal, sementara pembedaan antara dokumen asli dan palsu secara manual menjadi semakin sulit dilakukan.
 
 ## Keretanan Manipulasi Data
+
 Selain ijazah fisik, penyimpanan data kelulusan yang mengandalkan basis data terpusat (centralized database) sangat rawan terhadap manipulasi, kebocoran, dan modifikasi data yang tidak sah jika sistem mengalami peretasan.
 
 ## Risiko Kerusakan Fisik
+
 Dokumen cetal konvensional memiliki risiko tinggi untuk hilang, sobek, terbakar, atau rusak akibat bencana alam maupun kelalaian penyimpanan jangka panjang.
 
 ## Keterbatasan Logistik dan Geografis
+
 Proses verifikasi secara konvensional sangat tidak efisien karena menuntut verifikator (seperti perusahaan perekrut atau lembaga asing) untuk menghubungi institusi penerbit atau mengirimkan dokumen fisik secara langsung maupun lewat pos. Hal ini memicu penundaan waktu verifikasi yang lama (memakan waktu harian, mingguan, bahkan bulanan) serta membebani pemohon dengan biaya operasional dan administratif yang tinggi.
 
 ---
+
 Dari 3 contoh masalah di atas, kita harus mencari solusi yang lebih efisien agar proses pengesahan dan verifikasi menjadi lebih cepat dan tidak ada manipulatif data. Salah satu cara yang paling efisien menurut saya yaitu menggunakan sistem desentralisasi. Sistem desentralisasi memiliki atau sering kita sebut sebagai blockchain, blockchain secara sederhana yaitu teknologi untuk menyimpan, membagi dan mengelola data secara aman tanpa melibatkan otoritas pusat atau perentara pihak ketiga.
 
-Kenapa blockchain ini sangat cocok untuk studi ini? berikut alasan nya:
+Kenapa blockchain ini sangat cocok untuk studi ini? Berikut alasan-Nya:
+
 ## Kekekalan Data
+
 Data yang telah dicatat di dalam blockchain itu tidak dapat diubah, dihapus, atau dimanipulasi. Setiap blok terikat erat dengan blok sebelum dan sesudahnya menggunakan fungsi kriptografi, sehingga manipulasi sekecil apapun pada satu blok akan langsung merusak seluruh rantai dan terdeteksi secara langsung.
 
 ## Desentralisasi
+
 Blockchain beroperasi pada jaringan Peer-to-Peer (P2P) di mana setiap node memegang salinan data yang identik. Mekanisme konsensus memastikan validasi data hanya terjadi ketika disetujui oleh banyak pihak, sehingga mengeliminasi ketergantungan pada satu server pusat dan meningkatkan transparansi serta akuntabilitas.
 
-Kemudian untuk menerapkan teknologi blockchain di lingkungan akademik, kita memerlukan arsitektur yang cocok untuk studi ini. Salah satu nya yaitu kita menggunakan 2 teknologi inti
+Kemudian untuk menerapkan teknologi blockchain di lingkungan akademik, kita memerlukan arsitektur yang cocok untuk studi ini. Salah satu-Nya yaitu kita menggunakan 2 teknologi inti:
+
 ## Hyperledger
+
 Hyperledger ini salah satu platform blockchain private yang dapat kita gunakan karena menawarkan mekanisme kontrol akses berbasis *Role-Based Access Control*, yang dimana mekanisme ini memastikan bahwa hanya node institusi akademik resmi dan terotorisasi yang dapat menerbitkan atau memvalidasi dokumen di dalam jaringan. Selain itu juga, hyperledger ini *Zero Gas Transaction*, yang artinya untuk melakukan transaksi, kita tidak memerlukan gas-fee seperti blockchain public (Bitcoin, Ethereum Network, Cosmos, dll).
 
 ## IPFS (InterPlanetary File System)
+
 IPFS ini berfungsi sebagai menyimpan berkas fisik seperti PDF Ijazah secara desentral, berbeda hal-Nya dengan kita membangun sistem penyimpanan sendiri, yang dimana untuk membangun sistem penyimpanan sendiri itu membutuhkan biaya yang sangat mahal dan perlu melakukan pemeliharan.
 
 ---
 
 # Pembahasan Penelitian
-Berdasarkan masalah di atas, saya berfikir **Bagaimana merancang sistemyang dapat melakukan pengesahan dan verifikasi dokumen akademik dengan aman, terdistribusi, dan mudah diverifikasi?**. Untuk memecahkan masalah yang dimention di atas, saya merancang sebuah sistem berbasis blockchain yang dapat digunakan untuk pengesahan dan verifikasi dokumen secara efisien.
 
->> lanjutkan disini
+Berdasarkan masalah di atas, saya berfikir **Bagaimana merancang sistemyang dapat melakukan pengesahan dan verifikasi dokumen akademik dengan aman, terdistribusi, dan mudah diverifikasi?**
 
+Untuk memecahkan masalah yang dimention di atas, saya merancang sebuah sistem berbasis blockchain yang dapat digunakan untuk pengesahan dan verifikasi dokumen secara efisien.
+
+> Lanjutkan disini
 
 # Penutup
+
 Segitu saja pembahasan singkat yang saya buat karena keresahan saya mengenai *placeholder*.
 
-**Note:** mohon maaf klo gambar nya saya ambil diluar topik utama :v
+> [!NOTE]
+> Mohon maaf klo gambar-Nya saya ambil diluar topik utama :v

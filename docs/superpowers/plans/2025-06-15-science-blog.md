@@ -6,7 +6,7 @@
 
 **Architecture:** Next.js 16 App Router with static generation. Articles stored as `.tex` files in `articles/[slug]/` folders with `metadata.json`. A custom LaTeX tokenizer/parser converts `.tex` → AST → React components, delegating math to KaTeX server-side rendering. IEEE-style B&W styling with serif fonts.
 
-**Tech Stack:** Next.js 16, React 19, TypeScript, KaTeX, Tailwind CSS (minimal — mostly custom CSS)
+**Tech Stack:** Next.js 16, React 19, TypeScript, KaTeX, Tailwind CSS (minimal - mostly custom CSS)
 
 **Spec:** `docs/superpowers/specs/2025-06-15-science-blog-design.md`
 
@@ -111,7 +111,7 @@ export const siteConfig = {
 
 - [ ] **Step 2: Create LaTeX parser type definitions**
 
-Write to `lib/latex-parser/types.ts` — contains all Token types, AST node interfaces (DocumentNode, SectionNode, MathInlineNode, TheoremNode, BibliographyNode, etc.), and ArticleMetadata interface. Full contents in the spec section 4.
+Write to `lib/latex-parser/types.ts` - contains all Token types, AST node interfaces (DocumentNode, SectionNode, MathInlineNode, TheoremNode, BibliographyNode, etc.), and ArticleMetadata interface. Full contents in the spec section 4.
 
 Key types:
 - `TokenType`: COMMAND, BRACE_OPEN/CLOSE, BRACKET_OPEN/CLOSE, MATH_INLINE, MATH_DISPLAY, ENVIRONMENT_BEGIN/END, TEXT, NEWLINE, AMPERSAND, LINEBREAK
@@ -176,7 +176,7 @@ git commit -m "feat: add KaTeX bridge for math rendering"
 
 - [ ] **Step 1: Create the tokenizer**
 
-Write to `lib/latex-parser/tokenizer.ts` — a `tokenize(source: string): Token[]` function that processes LaTeX source character-by-character and emits tokens. Handles:
+Write to `lib/latex-parser/tokenizer.ts` - a `tokenize(source: string): Token[]` function that processes LaTeX source character-by-character and emits tokens. Handles:
 - `%` comments (skip to EOL)
 - Double newlines → NEWLINE tokens (paragraph breaks)
 - Single newlines → ignored (whitespace)
@@ -208,7 +208,7 @@ git commit -m "feat: add LaTeX tokenizer"
 
 - [ ] **Step 1: Create the parser**
 
-Write to `lib/latex-parser/parser.ts` — a `parse(tokens: Token[]): DocumentNode` function with a recursive descent parser. Key internals:
+Write to `lib/latex-parser/parser.ts` - a `parse(tokens: Token[]): DocumentNode` function with a recursive descent parser. Key internals:
 - `readBraceGroupRaw()`: read `{...}` as raw string
 - `readBraceGroupParsed()`: read `{...}` as parsed AST nodes
 - `readBracketGroupRaw()`: read optional `[...]`
@@ -233,7 +233,7 @@ git commit -m "feat: add LaTeX parser (tokens to AST)"
 
 - [ ] **Step 1: Create the renderer**
 
-Write to `lib/latex-parser/renderer.tsx` — exports `renderDocument(doc: DocumentNode, slug: string): React.ReactNode`. Uses a `RenderState` for IEEE numbering:
+Write to `lib/latex-parser/renderer.tsx` - exports `renderDocument(doc: DocumentNode, slug: string): React.ReactNode`. Uses a `RenderState` for IEEE numbering:
 - Sections: Roman numerals (I., II.)
 - Subsections: Capital letters (A., B.)
 - Subsubsections: Arabic + paren (1), 2))
@@ -260,11 +260,11 @@ git commit -m "feat: add LaTeX AST to React renderer"
 
 - [ ] **Step 1: Create articles utility**
 
-Write to `lib/articles.ts` — exports:
-- `getArticleMetadata(slug): ArticleMetadata | null` — reads `articles/{slug}/metadata.json`
-- `getArticleSource(slug, entrypoint): string | null` — reads `.tex` file
-- `getAllArticleSlugs(): string[]` — lists article directories
-- `getPublishedArticles(): ArticleMetadata[]` — returns published articles sorted by date desc
+Write to `lib/articles.ts` - exports:
+- `getArticleMetadata(slug): ArticleMetadata | null` - reads `articles/{slug}/metadata.json`
+- `getArticleSource(slug, entrypoint): string | null` - reads `.tex` file
+- `getAllArticleSlugs(): string[]` - lists article directories
+- `getPublishedArticles(): ArticleMetadata[]` - returns published articles sorted by date desc
 
 All use `fs.readFileSync` (server-side only, called at build time).
 
@@ -396,7 +396,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: siteConfig.title,
-  description: `${siteConfig.author.name} — ${siteConfig.author.bio}`,
+  description: `${siteConfig.author.name} - ${siteConfig.author.bio}`,
 };
 
 export default function RootLayout({
@@ -747,10 +747,10 @@ git commit -m "content: add sample quantum entanglement article"
 npm run dev
 ```
 
-Open `http://localhost:3000` — verify homepage shows author profile and article list.
-Open `http://localhost:3000/articles/quantum-entanglement` — verify article renders with:
+Open `http://localhost:3000` - verify homepage shows author profile and article list.
+Open `http://localhost:3000/articles/quantum-entanglement` - verify article renders with:
 - Title, author, date header
-- Abstract with "Abstract—" label
+- Abstract with "Abstract-" label
 - IEEE-style section numbering (I., II., III., IV.)
 - KaTeX-rendered math equations
 - Theorem and proof environments

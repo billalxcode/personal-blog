@@ -27,7 +27,7 @@ export async function generateMetadata({
   if (!metadata) return { title: "Not Found" };
 
   const journalUrl = `${siteConfig.url}/journals/${slug}`;
-  const journalDescription = `${metadata.title} — a research journal by ${metadata.author}`;
+  const journalDescription = `${metadata.title} - a research journal by ${metadata.author}`;
 
   return {
     title: metadata.title,
@@ -111,7 +111,7 @@ export default async function JournalPage({ params }: PageProps) {
         </Link>
       </nav>
       <div className="paper-folio" aria-hidden="true">
-        <span className="paper-folio__left">Journal — Preprint</span>
+        <span className="paper-folio__left">Journal - Preprint</span>
         <span className="paper-folio__right">
           {siteConfig.title} · {published}
         </span>

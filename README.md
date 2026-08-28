@@ -54,7 +54,7 @@ personal-blog/
 
 ## 📝 Authoring Content
 
-### Articles (MDX) — casual posts
+### Articles (MDX) - casual posts
 
 Create a folder inside `articles/`:
 
@@ -75,7 +75,7 @@ Create a folder inside `articles/`:
    ```
    Supports GFM, code blocks, Mermaid (` ```mermaid `), and alerts (`> [!NOTE]`).
 
-### Journals (LaTeX) — formal papers
+### Journals (LaTeX) - formal papers
 
 Create a folder inside `journals/`:
 

@@ -102,7 +102,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </Link>
       </nav>
       <div className="paper-folio" aria-hidden="true">
-        <span className="paper-folio__left">Article — Preprint</span>
+        <span className="paper-folio__left">Article - Preprint</span>
         <span className="paper-folio__right">
           masbill.xyz · {formattedDate}
         </span>
@@ -120,7 +120,7 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
           {metadata.description && (
             <div className="paper-lead">
-              <strong>Abstract—</strong> {metadata.description}
+              <strong>Abstract:</strong> {metadata.description}
             </div>
           )}
           {metadata.tags.length > 0 && (

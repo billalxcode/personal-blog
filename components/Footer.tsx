@@ -19,7 +19,7 @@ export function Footer() {
           </a>
           <span className="site-footer__sep">·</span>
           <span className="site-footer__meta">
-            Set in STIX Two Text & IBM Plex Mono — Preprint
+            Set in STIX Two Text & IBM Plex Mono - Preprint
           </span>
         </nav>
       </div>

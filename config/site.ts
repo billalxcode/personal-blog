@@ -29,7 +29,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  title: "Journal — Billal Fauzan",
+  title: "Journal - Billal Fauzan",
   description:
     "Research articles and projects in Machine Learning, Agentic AI, and Computer Vision by Billal Fauzan.",
   url: "https://masbill.xyz",

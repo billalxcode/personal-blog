@@ -1,42 +1,57 @@
 @import "katex/dist/katex.min.css";
 @import "tailwindcss";
 
-/* Times New Roman — local from public/fonts/times.ttf */
+/* Times New Roman - local from public/fonts/times.ttf
+   Hanya 1 file Regular (400) - bold/italic akan synthetic.
+   Tambah local() supaya kalau OS punya Times Bold asli akan dipakai. */
 @font-face {
   font-family: "Times New Roman";
-  src: url("/fonts/times.ttf") format("truetype");
+  src:
+    local("Times New Roman"),
+    local("TimesNewRomanPSMT"),
+    url("/fonts/times.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Times New Roman";
-  src: url("/fonts/times.ttf") format("truetype");
+  src:
+    local("Times New Roman Bold"),
+    local("TimesNewRomanPS-BoldMT"),
+    local("Times New Roman"),
+    url("/fonts/times.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Times New Roman";
-  src: url("/fonts/times.ttf") format("truetype");
+  src:
+    local("Times New Roman Italic"),
+    local("TimesNewRomanPS-ItalicMT"),
+    url("/fonts/times.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Times New Roman";
-  src: url("/fonts/times.ttf") format("truetype");
+  src:
+    local("Times New Roman Bold Italic"),
+    local("TimesNewRomanPS-BoldItalicMT"),
+    url("/fonts/times.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 
 /* ========================================
-   IEEE Preprint — Design Tokens
+   IEEE Preprint - Design Tokens
    B&W only. No AI card, no shadow, no color accents.
    ======================================== */
 :root {
-  /* Paper stock — pure */
+  /* Paper stock - pure */
   --paper: #ffffff;
   --ink: #000000;
   --ink-secondary: #1a1a1a;
@@ -47,7 +62,7 @@
   --code-bg: #f5f5f3;
   --code-border: #d4d4ce;
 
-  /* Spacing — IEEE uses tight leading */
+  /* Spacing - IEEE uses tight leading */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 0.75rem;
@@ -56,11 +71,11 @@
   --space-2xl: 2rem;
   --space-3xl: 3rem;
 
-  /* Type — preprint is 10pt body */
-  --text-xs: 0.68rem;   /* 10.9px — mono meta */
-  --text-sm: 0.75rem;   /* 12px — captions */
+  /* Type - preprint is 10pt body */
+  --text-xs: 0.68rem;   /* 10.9px - mono meta */
+  --text-sm: 0.75rem;   /* 12px - captions */
   --text-base: 0.875rem;/* 14px */
-  --text-md: 0.9375rem; /* 15px — body */
+  --text-md: 0.9375rem; /* 15px - body */
   --text-lg: 1rem;
   --text-xl: 1.05rem;
   --text-2xl: 1.15rem;
@@ -83,6 +98,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-synthesis: weight style small-caps;
+  /* Izinkan synthetic bold/italic karena hanya 1 file Regular */
+  font-synthesis-weight: auto;
+  font-synthesis-style: auto;
 }
 
 body {
@@ -98,7 +117,7 @@ body {
 }
 
 /* ========================================
-   Running Header (folio) — IEEE preprint
+   Running Header (folio) - IEEE preprint
    ======================================== */
 .running-header {
   max-width: var(--measure);
@@ -124,7 +143,7 @@ body {
 }
 
 /* ========================================
-   Page Container — the paper itself
+   Page Container - the paper itself
    ======================================== */
 .page-container {
   max-width: var(--measure);
@@ -167,7 +186,7 @@ body {
 }
 
 /* ========================================
-   Homepage — Author Profile (IEEE Title Block)
+   Homepage - Author Profile (IEEE Title Block)
    ======================================== */
 .author-profile {
   text-align: center;
@@ -262,7 +281,7 @@ body {
   color: var(--rule-light);
 }
 
-/* Editorial lead — paper abstract for homepage */
+/* Editorial lead - paper abstract for homepage */
 .editorial-intro {
   margin: 0 0 18px;
   padding: 12px 16px;
@@ -286,7 +305,7 @@ body {
   color: var(--ink);
 }
 
-/* Table of contents — folio nav */
+/* Table of contents - folio nav */
 .toc-nav {
   display: flex;
   justify-content: space-between;
@@ -343,7 +362,7 @@ body {
 }
 
 /* ========================================
-   Homepage — Content Lists (TOC style)
+   Homepage - Content Lists (TOC style)
    ======================================== */
 .article-list {
   list-style: none;
@@ -410,7 +429,7 @@ body {
 }
 
 /* ========================================
-   Keywords / Tags — IEEE Keywords line
+   Keywords / Tags - IEEE Keywords line
    ======================================== */
 .article-tags {
   display: flex;
@@ -425,7 +444,7 @@ body {
 }
 
 .article-tags::before {
-  content: "Keywords—";
+  content: "Keywords:";
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
@@ -466,7 +485,7 @@ body {
 }
 
 .article-page-tags::before {
-  content: "Keywords—";
+  content: "Keywords:";
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
@@ -475,7 +494,7 @@ body {
 }
 
 /* ========================================
-   Footer — folio style
+   Footer - folio style
    ======================================== */
 .site-footer {
   margin-top: 32px;
@@ -534,7 +553,7 @@ body {
 }
 
 /* ========================================
-   Article / Journal Detail — IEEE header
+   Article / Journal Detail - IEEE header
    ======================================== */
 .article-header {
   text-align: center;
@@ -588,7 +607,7 @@ body {
   text-underline-offset: 3px;
 }
 
-/* Paper folio — top matter on detail pages */
+/* Paper folio - top matter on detail pages */
 .paper-folio {
   display: flex;
   justify-content: space-between;
@@ -640,7 +659,7 @@ body {
 }
 
 /* ========================================
-   Section Titles — IEEE centered small-caps
+   Section Titles - IEEE centered small-caps
    ======================================== */
 .section-title {
   font-size: 0.85rem;
@@ -691,7 +710,7 @@ body {
 }
 
 /* ========================================
-   LaTeX — Body Text (justified, hyphenated)
+   LaTeX - Body Text (justified, hyphenated)
    ======================================== */
 p {
   text-align: justify;
@@ -722,7 +741,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Math
+   LaTeX - Math
    ======================================== */
 .equation-wrapper {
   display: flex;
@@ -753,7 +772,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Lists (IEEE hanging)
+   LaTeX - Lists (IEEE hanging)
    ======================================== */
 .latex-list {
   margin: 8px 0 12px 1.5rem;
@@ -767,7 +786,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Theorems & Proofs (framed)
+   LaTeX - Theorems & Proofs (framed)
    ======================================== */
 .theorem-env {
   margin: 20px 0;
@@ -814,7 +833,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Figures & Images (IEEE fig)
+   LaTeX - Figures & Images (IEEE fig)
    ======================================== */
 .latex-figure {
   text-align: center;
@@ -842,7 +861,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Tables (IEEE booktabs)
+   LaTeX - Tables (IEEE booktabs)
    ======================================== */
 .latex-table-wrapper {
   margin: 22px 0;
@@ -880,7 +899,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Bibliography & Footnotes
+   LaTeX - Bibliography & Footnotes
    ======================================== */
 .latex-bibliography {
   margin-top: 32px;
@@ -951,7 +970,7 @@ p {
 }
 
 /* ========================================
-   LaTeX — Code (paper: light, bordered)
+   LaTeX - Code (paper: light, bordered)
    ======================================== */
 code {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, "Courier New", monospace;
@@ -971,7 +990,7 @@ code {
 }
 
 /* ========================================
-   Projects — as IEEE Systems section (no cards)
+   Projects - as IEEE Systems section (no cards)
    ======================================== */
 .project-section {
   margin-top: 28px;
@@ -1050,7 +1069,7 @@ code {
 }
 
 .project-tags::before {
-  content: "Index Terms—";
+  content: "Index Terms:";
   font-style: italic;
   text-transform: none;
   letter-spacing: 0;
@@ -1110,7 +1129,7 @@ code {
 }
 
 /* ========================================
-   MDX Content — paper body
+   MDX Content - paper body
    ======================================== */
 .mdx-content {
   line-height: 1.65;
@@ -1120,35 +1139,46 @@ code {
 }
 
 .mdx-h1 {
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  line-height: 1.25;
-  margin: 32px 0 12px;
-  text-align: center;
-  font-variant: small-caps;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  border-bottom: 1px solid var(--ink);
+  line-height: 1.2;
+  margin: 32px 0 14px;
+  text-align: left;
+  letter-spacing: -0.015em;
+  border-bottom: 1.5px solid var(--ink);
   padding-bottom: 6px;
 }
 
 .mdx-h2 {
-  font-size: 1.05rem;
+  font-size: 1.28rem;
   font-weight: 700;
-  font-variant: small-caps;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  margin: 28px 0 10px;
+  line-height: 1.3;
+  margin: 28px 0 12px;
+  text-align: left;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--rule-faint);
   padding-bottom: 4px;
-  border-bottom: 1px solid var(--ink);
-  text-align: center;
 }
 
 .mdx-h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 22px 0 8px;
+  text-align: left;
+  font-style: normal;
+  color: var(--ink);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mdx-h4 {
   font-size: 0.95rem;
   font-weight: 700;
   font-style: italic;
-  margin: 20px 0 8px;
+  margin: 18px 0 8px;
+  text-align: left;
+  color: var(--ink-secondary);
 }
 
 .mdx-p {
@@ -1185,7 +1215,7 @@ code {
   list-style-position: outside;
 }
 
-/* Nested levels — clear visual hierarchy like paper */
+/* Nested levels - clear visual hierarchy like paper */
 .mdx-ul .mdx-ul {
   list-style-type: circle;
   margin: 6px 0 6px 0;
@@ -1234,7 +1264,7 @@ code {
   font-size: 0.85em;
 }
 
-/* Paragraph inside li — no extra block gap like paper */
+/* Paragraph inside li - no extra block gap like paper */
 .mdx-li > p,
 .mdx-li > .mdx-p {
   margin-bottom: 0.45em;
@@ -1354,7 +1384,7 @@ code {
 }
 
 /* ========================================
-   MDX Alerts — paper framed notes (no color)
+   MDX Alerts - paper framed notes (no color)
    ======================================== */
 .mdx-alert {
   padding: 10px 12px;
@@ -1400,7 +1430,7 @@ code {
   margin-bottom: 0 !important;
 }
 
-/* All types same B&W — no pastel */
+/* All types same B&W - no pastel */
 .mdx-alert-note,
 .mdx-alert-tip,
 .mdx-alert-important,
@@ -1419,7 +1449,7 @@ code {
   color: var(--ink);
 }
 
-/* Mermaid — paper monochrome */
+/* Mermaid - paper monochrome */
 .mermaid-wrapper {
   border: 1px solid var(--ink);
   padding: 12px;

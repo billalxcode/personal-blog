@@ -5,7 +5,7 @@ export function AuthorProfile() {
   return (
     <header className="author-profile">
       <div className="author-kicker" aria-hidden="true">
-        Preprint &nbsp;·&nbsp; Vol. 2026 — No. 1 &nbsp;·&nbsp; masbill.xyz
+        Preprint &nbsp;·&nbsp; Vol. 2026 - No. 1 &nbsp;·&nbsp; masbill.xyz
       </div>
       <h1 className="author-name">{name}</h1>
       <p className="author-affiliation">{affiliation}</p>
